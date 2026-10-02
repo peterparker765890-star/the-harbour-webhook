@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#05070b">
+<meta name="theme-color" content="#030407">
 <meta name="description" content="THE HARBOUR — Chapter One: The Beginning — By Sabarish P">
 
-<title>THE HARBOUR — Chapter One</title>
+<title>THE HARBOUR | Chapter One</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-
 *{
     margin:0;
     padding:0;
@@ -22,10 +24,23 @@ html{
 }
 
 body{
-    background:#030508;
-    color:#eee;
+    background:#020306;
+    color:#e9e9e9;
     font-family:Inter,Arial,sans-serif;
     overflow-x:hidden;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root{
+    --red:#a81425;
+    --bright-red:#e52b3c;
+    --dark-red:#4d0812;
+    --white:#eeeeee;
+    --muted:#85878d;
+    --line:rgba(255,255,255,.09);
 }
 
 /* =========================
@@ -35,13 +50,13 @@ body{
 .loader{
     position:fixed;
     inset:0;
-    background:#020305;
-    z-index:9999;
+    background:#010204;
+    z-index:99999;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    transition:opacity 1s ease, visibility 1s ease;
+    transition:1s ease;
 }
 
 .loader.hide{
@@ -51,72 +66,101 @@ body{
 
 .loader-title{
     font-family:Cinzel,serif;
-    font-size:clamp(32px,9vw,75px);
-    letter-spacing:10px;
+    font-size:clamp(30px,9vw,75px);
+    letter-spacing:clamp(4px,2vw,13px);
     text-align:center;
+}
+
+.loader-sub{
+    margin-top:18px;
+    color:#666;
+    font-size:9px;
+    letter-spacing:5px;
 }
 
 .loader-line{
     width:180px;
-    height:2px;
-    background:#8d111b;
+    height:1px;
     margin-top:25px;
-    animation:loadLine 2s ease-in-out infinite;
+    background:#a81425;
+    box-shadow:0 0 15px #a81425;
+    animation:loaderLine 1.7s infinite;
 }
 
-@keyframes loadLine{
-    0%{transform:scaleX(.1);opacity:.2}
+@keyframes loaderLine{
+    0%{transform:scaleX(.05);opacity:.2}
     50%{transform:scaleX(1);opacity:1}
-    100%{transform:scaleX(.1);opacity:.2}
+    100%{transform:scaleX(.05);opacity:.2}
 }
 
 /* =========================
-   READING PROGRESS
+   PROGRESS
 ========================= */
 
 .progress{
     position:fixed;
     top:0;
     left:0;
-    width:0%;
+    width:0;
     height:3px;
-    background:linear-gradient(90deg,#6d0712,#ff3948,#8e0b18);
-    z-index:1000;
-    box-shadow:0 0 12px #ff2335;
+    background:linear-gradient(90deg,#530611,#d51d31,#ff4a58);
+    box-shadow:0 0 15px rgba(229,43,60,.7);
+    z-index:10000;
 }
 
 /* =========================
    NAVBAR
 ========================= */
 
-nav{
+.nav{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    padding:20px 5%;
+    height:72px;
+    padding:0 5%;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    z-index:500;
-    background:linear-gradient(to bottom,rgba(0,0,0,.85),transparent);
+    z-index:5000;
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,.88),
+        rgba(0,0,0,0)
+    );
+    pointer-events:none;
 }
 
-.logo{
+.nav-logo{
     font-family:Cinzel,serif;
-    font-weight:700;
-    letter-spacing:3px;
-    font-size:17px;
+    font-size:14px;
+    letter-spacing:4px;
+    pointer-events:auto;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .nav-btn{
-    border:1px solid rgba(255,255,255,.2);
+    pointer-events:auto;
+    border:1px solid rgba(255,255,255,.16);
     background:rgba(0,0,0,.35);
-    color:white;
-    padding:9px 16px;
+    color:#ddd;
+    padding:9px 14px;
     border-radius:30px;
+    font-size:9px;
+    letter-spacing:2px;
     cursor:pointer;
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    border-color:#9c1727;
+    color:#fff;
 }
 
 /* =========================
@@ -124,229 +168,279 @@ nav{
 ========================= */
 
 .hero{
-    min-height:100vh;
+    min-height:100svh;
     position:relative;
+    overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    overflow:hidden;
     background:
-        radial-gradient(circle at 50% 60%,rgba(91,10,19,.28),transparent 35%),
-        linear-gradient(to bottom,#02050a 0%,#07111a 60%,#020305 100%);
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(100,12,22,.20),
+            transparent 28%
+        ),
+        linear-gradient(
+            180deg,
+            #010307 0%,
+            #050c13 55%,
+            #020305 100%
+        );
+}
+
+/* Stars */
+
+.stars{
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1.5px),
+        radial-gradient(circle,rgba(255,255,255,.25) 1px,transparent 1.5px);
+    background-size:110px 110px,170px 170px;
+    background-position:20px 10px,70px 80px;
+    opacity:.25;
 }
 
 /* Moon */
 
 .moon{
     position:absolute;
-    width:180px;
-    height:180px;
+    width:190px;
+    height:190px;
+    right:9%;
+    top:14%;
     border-radius:50%;
-    background:radial-gradient(circle,#d9d9d9,#888 60%,#333);
-    top:16%;
-    right:12%;
-    opacity:.18;
-    filter:blur(1px);
-    box-shadow:0 0 70px rgba(220,220,220,.2);
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d9d9d9,
+            #858585 58%,
+            #353535
+        );
+    opacity:.13;
+    box-shadow:0 0 100px rgba(220,220,220,.18);
 }
 
 /* Ocean */
 
 .ocean{
     position:absolute;
-    bottom:0;
-    width:100%;
-    height:37%;
+    left:-5%;
+    bottom:-3%;
+    width:110%;
+    height:42%;
     background:
         repeating-linear-gradient(
-            170deg,
-            rgba(255,255,255,.03) 0px,
-            rgba(255,255,255,.03) 2px,
-            transparent 2px,
-            transparent 18px
+            168deg,
+            transparent 0 12px,
+            rgba(255,255,255,.045) 13px,
+            transparent 15px 25px
         ),
-        linear-gradient(to bottom,#07141e,#010305);
-    animation:oceanMove 8s linear infinite;
+        linear-gradient(
+            to bottom,
+            rgba(5,25,36,.4),
+            #010204
+        );
+    transform:skewY(-1deg);
+    animation:ocean 12s linear infinite;
 }
 
-@keyframes oceanMove{
-    from{background-position:0 0}
-    to{background-position:300px 0}
+@keyframes ocean{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:500px 0;
+    }
 }
 
-/* Ship silhouette */
+/* Ship */
 
 .ship{
     position:absolute;
-    bottom:22%;
+    bottom:25%;
     left:50%;
     transform:translateX(-50%);
-    width:390px;
-    height:75px;
+    width:min(500px,75vw);
+    height:100px;
     background:#010203;
-    clip-path:polygon(0 55%,8% 55%,14% 35%,70% 35%,78% 0,100% 0,95% 55%,100% 65%,84% 75%,20% 75%);
-    opacity:.9;
-    filter:drop-shadow(0 0 20px rgba(0,0,0,.9));
+    clip-path:polygon(
+        0 53%,
+        8% 53%,
+        13% 35%,
+        67% 35%,
+        73% 7%,
+        91% 7%,
+        100% 55%,
+        93% 68%,
+        22% 75%
+    );
+    filter:drop-shadow(0 0 20px #000);
 }
 
-.ship::after{
-    content:"";
+.ship-light{
     position:absolute;
-    width:100%;
+    width:3px;
     height:3px;
-    bottom:10px;
-    left:0;
-    background:#57101a;
-    box-shadow:0 0 15px #7b111c;
+    border-radius:50%;
+    background:#d92b3a;
+    box-shadow:0 0 10px #d92b3a;
+    bottom:31%;
+    left:calc(50% + 30px);
+    animation:blink 2s infinite;
+}
+
+@keyframes blink{
+    0%,45%,100%{opacity:.2}
+    50%,70%{opacity:1}
 }
 
 /* Fog */
 
 .fog{
     position:absolute;
-    inset:auto -20% 17%;
-    height:180px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(190,200,210,.08),
-        transparent
-    );
-    filter:blur(25px);
-    animation:fogMove 12s ease-in-out infinite alternate;
+    width:150%;
+    height:220px;
+    left:-25%;
+    bottom:18%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(220,225,230,.09),
+            transparent
+        );
+    filter:blur(28px);
+    animation:fog 13s ease-in-out infinite alternate;
 }
 
-@keyframes fogMove{
-    from{transform:translateX(-15%)}
-    to{transform:translateX(15%)}
+@keyframes fog{
+    from{transform:translateX(-10%)}
+    to{transform:translateX(10%)}
 }
 
-/* Particles */
+/* Hero vignette */
 
-.particles{
+.hero:after{
+    content:"";
     position:absolute;
     inset:0;
     pointer-events:none;
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0,0,0,.78) 100%
+        );
 }
 
-.particle{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.5;
-    animation:float 7s infinite ease-in-out;
-}
-
-@keyframes float{
-    0%,100%{transform:translateY(0);opacity:.1}
-    50%{transform:translateY(-80px);opacity:.8}
-}
-
-/* Hero text */
+/* Hero content */
 
 .hero-content{
     position:relative;
-    z-index:5;
-    padding:20px;
-    animation:heroIn 1.8s ease forwards;
+    z-index:10;
+    width:min(1000px,92%);
+    padding:40px 15px;
+    animation:heroEnter 1.8s ease;
 }
 
-@keyframes heroIn{
+@keyframes heroEnter{
     from{
         opacity:0;
-        transform:translateY(35px);
+        transform:translateY(35px) scale(.97);
     }
     to{
         opacity:1;
-        transform:translateY(0);
+        transform:translateY(0) scale(1);
     }
 }
 
-.eyebrow{
-    font-size:12px;
+.hero-tag{
+    color:#888;
+    font-size:10px;
     letter-spacing:7px;
-    color:#aaa;
-    margin-bottom:25px;
+    margin-bottom:28px;
 }
 
 .hero h1{
     font-family:Cinzel,serif;
-    font-size:clamp(48px,13vw,125px);
-    line-height:.9;
-    letter-spacing:clamp(3px,1vw,13px);
+    font-weight:800;
+    font-size:clamp(50px,13vw,135px);
+    line-height:.84;
+    letter-spacing:clamp(2px,1vw,12px);
     text-shadow:
-        0 0 25px rgba(255,255,255,.08),
-        5px 5px 0 rgba(80,0,10,.35);
+        0 0 25px rgba(255,255,255,.06),
+        5px 5px 0 rgba(80,0,10,.25);
 }
 
-.hero h1 span{
+.hero h1 .top{
     display:block;
-    color:#eee;
+    font-size:.48em;
+    letter-spacing:8px;
+    margin-bottom:8px;
+    color:#bfc0c2;
 }
 
-.subtitle{
-    margin-top:28px;
+.hero h1 .main{
+    display:block;
+}
+
+.hero-subtitle{
+    margin-top:32px;
     font-family:Cinzel,serif;
-    letter-spacing:4px;
-    font-size:14px;
-    color:#aaa;
-}
-
-.author{
-    margin-top:18px;
-    color:#fff;
-    letter-spacing:4px;
-    font-size:13px;
-}
-
-.begin{
-    display:inline-flex;
-    margin-top:42px;
-    padding:15px 30px;
-    color:#fff;
-    text-decoration:none;
-    border:1px solid rgba(255,255,255,.3);
-    background:rgba(255,255,255,.04);
-    backdrop-filter:blur(12px);
-    transition:.35s;
-    letter-spacing:3px;
+    color:#a5a5a8;
     font-size:12px;
-}
-
-.begin:hover{
-    background:#78101b;
-    border-color:#a91b28;
-    box-shadow:0 0 30px rgba(160,20,35,.35);
-    transform:translateY(-3px);
-}
-
-/* =========================
-   SECTION COMMON
-========================= */
-
-section{
-    position:relative;
-}
-
-.container{
-    width:min(1100px,90%);
-    margin:auto;
-}
-
-.section-title{
-    font-family:Cinzel,serif;
-    font-size:clamp(27px,5vw,48px);
-    margin-bottom:15px;
-}
-
-.section-label{
-    color:#a8a8a8;
     letter-spacing:4px;
+}
+
+.hero-author{
+    margin-top:17px;
     font-size:11px;
-    text-transform:uppercase;
+    letter-spacing:5px;
+}
+
+.begin-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:40px;
+    padding:15px 28px;
+    color:white;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(10px);
+    letter-spacing:3px;
+    font-size:10px;
+    transition:.35s;
+}
+
+.begin-btn span{
+    margin-left:12px;
+    color:#d82a3b;
+}
+
+.begin-btn:hover{
+    background:#74101d;
+    border-color:#b52131;
+    box-shadow:
+        0 0 25px rgba(170,20,35,.35),
+        inset 0 0 20px rgba(255,255,255,.04);
+    transform:translateY(-4px);
+}
+
+/* Scroll hint */
+
+.scroll-hint{
+    position:absolute;
+    z-index:15;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#555;
+    font-size:8px;
+    letter-spacing:4px;
 }
 
 /* =========================
@@ -354,179 +448,290 @@ section{
 ========================= */
 
 .contents{
+    position:relative;
     padding:120px 0;
     background:
-        radial-gradient(circle at 20% 20%,rgba(100,10,20,.13),transparent 30%),
-        #05070b;
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(100,10,20,.14),
+            transparent 30%
+        ),
+        #030509;
+}
+
+.container{
+    width:min(1100px,90%);
+    margin:auto;
+}
+
+.section-label{
+    font-size:9px;
+    color:#8e1a27;
+    letter-spacing:5px;
+    margin-bottom:16px;
+}
+
+.section-title{
+    font-family:Cinzel,serif;
+    font-size:clamp(30px,5vw,55px);
+    letter-spacing:1px;
 }
 
 .chapter-grid{
-    margin-top:50px;
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:18px;
+    margin-top:50px;
 }
 
-.chapter{
-    min-height:230px;
+.chapter-card{
+    min-height:260px;
     padding:30px;
-    border:1px solid rgba(255,255,255,.1);
-    background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
     position:relative;
     overflow:hidden;
-    transition:.4s;
+    border:1px solid var(--line);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.008)
+        );
+    transition:.45s;
 }
 
-.chapter:hover{
-    transform:translateY(-7px);
-    border-color:rgba(180,20,35,.6);
-    box-shadow:0 15px 50px rgba(0,0,0,.4);
+.chapter-card:before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:rgba(150,10,25,.08);
+    filter:blur(35px);
+    right:-50px;
+    bottom:-50px;
 }
 
-.chapter-number{
-    color:#777;
+.chapter-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(180,25,40,.5);
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+.card-number{
     font-family:Cinzel,serif;
-    font-size:13px;
+    color:#666;
+    font-size:11px;
     letter-spacing:3px;
 }
 
-.chapter h3{
-    margin-top:25px;
+.chapter-card h3{
     font-family:Cinzel,serif;
     font-size:23px;
+    margin-top:25px;
 }
 
-.chapter-status{
-    display:inline-block;
-    margin-top:35px;
-    padding:7px 11px;
-    font-size:9px;
+.card-status{
+    position:absolute;
+    bottom:28px;
+    left:30px;
+    font-size:8px;
     letter-spacing:2px;
-    border:1px solid rgba(255,255,255,.18);
+    padding:7px 10px;
+    border:1px solid rgba(255,255,255,.15);
 }
 
 .available{
-    color:#ff5360;
-    border-color:#71121c;
+    color:#e43a4a;
+    border-color:rgba(180,20,35,.55);
 }
 
 .locked{
-    color:#777;
+    color:#666;
+}
+
+.lock-icon{
+    position:absolute;
+    right:28px;
+    top:30px;
+    font-size:18px;
+    opacity:.3;
 }
 
 /* =========================
-   STORY INTRO
+   INTRO
 ========================= */
 
 .intro{
-    padding:100px 0 60px;
-    background:#030508;
+    padding:100px 0 80px;
+    background:#020306;
+    border-top:1px solid rgba(255,255,255,.04);
+    border-bottom:1px solid rgba(255,255,255,.04);
 }
 
-.intro-box{
-    max-width:750px;
+.intro-inner{
+    max-width:760px;
     margin:auto;
     text-align:center;
 }
 
-.intro-box p{
-    color:#aaa;
+.intro-inner h2{
+    font-family:Playfair Display,Georgia,serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(27px,5vw,44px);
+}
+
+.intro-inner p{
+    color:#85878c;
     line-height:1.9;
-    margin-top:20px;
+    margin-top:24px;
+    font-size:14px;
 }
 
 /* =========================
-   CHAPTER
+   STORY
 ========================= */
 
 .story{
-    padding:70px 0 130px;
+    padding:100px 0 140px;
+    position:relative;
     background:
-        linear-gradient(rgba(3,5,8,.92),rgba(3,5,8,.96)),
-        radial-gradient(circle at center,#171b22,transparent 70%);
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.22),
+            transparent 25%,
+            transparent 75%,
+            rgba(0,0,0,.22)
+        ),
+        #04060a;
 }
 
-.chapter-header{
+.story:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:50%;
+    width:1px;
+    height:100%;
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(150,20,35,.15),
+        transparent
+    );
+}
+
+.chapter-heading{
     text-align:center;
     margin-bottom:90px;
+    position:relative;
+    z-index:2;
 }
 
-.chapter-header .chapter-label{
-    color:#b52a36;
-    letter-spacing:5px;
-    font-size:11px;
+.chapter-heading .small{
+    color:#b51d2c;
+    letter-spacing:6px;
+    font-size:9px;
 }
 
-.chapter-header h2{
+.chapter-heading h2{
     margin-top:20px;
     font-family:Cinzel,serif;
-    font-size:clamp(35px,7vw,65px);
+    font-size:clamp(38px,7vw,72px);
 }
 
-.chapter-header p{
+.chapter-heading p{
     margin-top:15px;
-    color:#777;
-    letter-spacing:3px;
-    font-size:12px;
+    color:#555;
+    letter-spacing:4px;
+    font-size:9px;
 }
 
-/* Story text */
+/* Story */
 
-.story-text{
-    max-width:760px;
+.story-content{
+    width:min(770px,92%);
     margin:auto;
+    position:relative;
+    z-index:2;
 }
 
-.story-text p{
+.story-content p{
     font-family:Georgia,'Times New Roman',serif;
-    font-size:19px;
-    line-height:2;
-    color:#d5d5d5;
+    font-size:18px;
+    line-height:2.05;
+    color:#d2d2d3;
     margin-bottom:28px;
 }
 
-.story-text p:first-child::first-letter{
+.story-content p:first-of-type:first-letter{
     float:left;
-    font-size:70px;
-    line-height:.75;
-    padding-right:10px;
-    color:#a81725;
     font-family:Cinzel,serif;
+    font-size:75px;
+    line-height:.72;
+    padding-right:11px;
+    padding-top:8px;
+    color:#b51b2b;
 }
 
-.scene-break{
+/* Scene title */
+
+.scene-title{
+    margin:80px 0 42px;
+    padding:25px 0;
+    border-top:1px solid rgba(160,20,35,.28);
+    border-bottom:1px solid rgba(160,20,35,.28);
     text-align:center;
-    margin:65px 0;
-    color:#6e1019;
-    letter-spacing:10px;
 }
 
-/* =========================
-   CINEMATIC QUOTES
-========================= */
-
-.quote{
-    margin:70px auto;
-    padding:45px 25px;
-    max-width:760px;
-    text-align:center;
-    border-top:1px solid rgba(160,20,35,.4);
-    border-bottom:1px solid rgba(160,20,35,.4);
-}
-
-.quote p{
+.scene-title span{
     font-family:Cinzel,serif;
     font-size:clamp(21px,4vw,32px);
-    line-height:1.5;
-    color:#eee;
+    letter-spacing:3px;
 }
 
-.quote span{
+.scene-title:before,
+.scene-title:after{
+    content:"✦";
+    color:#9b1625;
+    margin:0 15px;
+    font-size:10px;
+}
+
+/* Scene break */
+
+.break{
+    text-align:center;
+    margin:65px 0;
+    color:#72101b;
+    letter-spacing:9px;
+}
+
+/* Quote */
+
+.story-quote{
+    margin:70px auto;
+    padding:42px 25px;
+    text-align:center;
+    border-top:1px solid rgba(160,20,35,.35);
+    border-bottom:1px solid rgba(160,20,35,.35);
+}
+
+.story-quote p{
+    font-family:Cinzel,serif;
+    font-size:clamp(21px,4vw,31px);
+    line-height:1.55;
+    color:#eee;
+    margin:0;
+}
+
+.story-quote small{
     display:block;
-    margin-top:15px;
-    color:#777;
-    font-size:11px;
-    letter-spacing:3px;
+    margin-top:18px;
+    color:#666;
+    font-family:Inter,sans-serif;
+    font-size:8px;
+    letter-spacing:4px;
 }
 
 /* =========================
@@ -534,70 +739,85 @@ section{
 ========================= */
 
 .ending{
-    min-height:90vh;
+    min-height:100svh;
+    position:relative;
+    overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     background:
-        radial-gradient(circle at center,rgba(95,5,15,.18),transparent 45%),
-        #020304;
-    overflow:hidden;
+        radial-gradient(
+            circle at center,
+            rgba(105,7,18,.22),
+            transparent 40%
+        ),
+        #010204;
 }
 
-.ending::before{
-    content:"";
+.fire-glow{
     position:absolute;
     width:600px;
-    height:600px;
-    border-radius:50%;
-    border:1px solid rgba(120,15,25,.12);
-    animation:pulse 5s infinite;
+    height:300px;
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(170,15,25,.17),
+            transparent 65%
+        );
+    filter:blur(30px);
+    animation:fire 2s infinite alternate;
 }
 
-@keyframes pulse{
-    0%,100%{transform:scale(.8);opacity:.2}
-    50%{transform:scale(1.15);opacity:.6}
+@keyframes fire{
+    from{transform:scale(.9);opacity:.4}
+    to{transform:scale(1.1);opacity:.8}
 }
 
 .ending-content{
     position:relative;
-    z-index:2;
-    padding:25px;
+    z-index:3;
+    padding:30px;
 }
 
-.ending-small{
-    color:#777;
-    letter-spacing:6px;
-    font-size:10px;
+.ending-top{
+    color:#666;
+    font-size:9px;
+    letter-spacing:7px;
 }
 
 .ending h2{
-    margin:25px 0;
     font-family:Cinzel,serif;
-    font-size:clamp(38px,8vw,80px);
+    font-size:clamp(38px,8vw,82px);
+    margin:25px 0;
+}
+
+.ending-message{
+    font-family:Playfair Display,Georgia,serif;
+    font-style:italic;
+    color:#ccc;
+    font-size:clamp(19px,4vw,28px);
 }
 
 .ending-line{
-    color:#ddd;
-    font-family:Georgia,serif;
-    font-size:clamp(18px,4vw,27px);
-    font-style:italic;
+    width:90px;
+    height:1px;
+    background:#8e1523;
+    margin:35px auto;
 }
 
-.continue{
-    margin-top:55px;
-    color:#b3212e;
+.next-chapter{
+    color:#c32536;
     font-family:Cinzel,serif;
-    letter-spacing:4px;
-    font-size:13px;
+    font-size:12px;
+    letter-spacing:5px;
 }
 
-.next{
-    margin-top:15px;
-    color:#777;
+.next-date{
+    color:#555;
+    font-size:9px;
     letter-spacing:3px;
-    font-size:11px;
+    margin-top:12px;
 }
 
 /* =========================
@@ -605,38 +825,36 @@ section{
 ========================= */
 
 .author-section{
-    padding:90px 0;
-    background:#06080c;
+    padding:100px 0;
+    background:#05070b;
     text-align:center;
 }
 
-.author-card{
-    max-width:650px;
-    margin:auto;
-}
-
-.author-mark{
+.author-symbol{
     width:70px;
     height:70px;
-    border:1px solid rgba(255,255,255,.25);
+    border:1px solid rgba(255,255,255,.2);
     border-radius:50%;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     margin:0 auto 25px;
     font-family:Cinzel,serif;
-    font-size:22px;
+    font-size:18px;
+    box-shadow:0 0 30px rgba(130,10,25,.08);
 }
 
-.author-card h2{
+.author-section h2{
     font-family:Cinzel,serif;
-    font-size:30px;
+    font-size:29px;
 }
 
-.author-card p{
-    margin-top:18px;
-    color:#888;
+.author-section p{
+    max-width:580px;
+    margin:18px auto 0;
+    color:#73757a;
     line-height:1.8;
+    font-size:13px;
 }
 
 /* =========================
@@ -644,23 +862,25 @@ section{
 ========================= */
 
 footer{
-    padding:30px 20px;
     text-align:center;
+    padding:30px 15px;
+    border-top:1px solid rgba(255,255,255,.05);
     background:#020305;
-    border-top:1px solid rgba(255,255,255,.06);
-    color:#555;
-    font-size:10px;
-    letter-spacing:2px;
+    color:#4c4d51;
+    font-size:8px;
+    letter-spacing:3px;
 }
 
 /* =========================
-   REVEAL ANIMATION
+   REVEAL
 ========================= */
 
 .reveal{
     opacity:0;
-    transform:translateY(30px);
-    transition:1s ease;
+    transform:translateY(35px);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 .reveal.show{
@@ -669,33 +889,63 @@ footer{
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:800px){
 
-    .chapter-grid{
-        grid-template-columns:1fr;
+    .nav{
+        height:62px;
+        padding:0 4%;
     }
 
-    .chapter{
-        min-height:190px;
+    .nav-logo{
+        font-size:11px;
+        letter-spacing:3px;
+    }
+
+    .nav-btn{
+        padding:8px 11px;
+        font-size:8px;
     }
 
     .moon{
         width:120px;
         height:120px;
-        right:8%;
+        top:17%;
+        right:7%;
     }
 
     .ship{
-        width:290px;
-        bottom:24%;
+        bottom:27%;
+        height:70px;
     }
 
-    .story-text p{
-        font-size:18px;
-        line-height:1.9;
+    .ocean{
+        height:35%;
+    }
+
+    .hero-tag{
+        font-size:8px;
+        letter-spacing:4px;
+    }
+
+    .hero-subtitle{
+        font-size:9px;
+        letter-spacing:3px;
+    }
+
+    .hero-author{
+        font-size:9px;
+        letter-spacing:4px;
+    }
+
+    .chapter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chapter-card{
+        min-height:220px;
     }
 
     .contents{
@@ -703,11 +953,38 @@ footer{
     }
 
     .intro{
-        padding:75px 0 35px;
+        padding:80px 0 60px;
+    }
+
+    .story{
+        padding:80px 0 100px;
+    }
+
+    .story-content p{
+        font-size:17px;
+        line-height:1.95;
+    }
+
+    .story-content p:first-of-type:first-letter{
+        font-size:62px;
+    }
+
+    .scene-title{
+        margin:65px 0 35px;
+    }
+
+    .scene-title:before,
+    .scene-title:after{
+        margin:0 8px;
+    }
+
+    .ending{
+        min-height:80svh;
     }
 }
 
 @media(prefers-reduced-motion:reduce){
+
     *,
     *::before,
     *::after{
@@ -721,71 +998,93 @@ footer{
 
 <body>
 
-<!-- LOADING -->
+<!-- LOADER -->
 
 <div class="loader" id="loader">
     <div class="loader-title">THE HARBOUR</div>
+    <div class="loader-sub">ENTERING THE STORY</div>
     <div class="loader-line"></div>
 </div>
 
+<!-- PROGRESS -->
+
 <div class="progress" id="progress"></div>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 
-<nav>
-    <div class="logo">THE HARBOUR</div>
-    <button class="nav-btn" onclick="document.getElementById('contents').scrollIntoView()">
-        CONTENTS
-    </button>
+<nav class="nav">
+
+    <div class="nav-logo">
+        THE HARBOUR
+    </div>
+
+    <div class="nav-right">
+
+        <button
+            class="nav-btn"
+            onclick="document.getElementById('contents').scrollIntoView()">
+            CONTENTS
+        </button>
+
+    </div>
+
 </nav>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
+    <div class="stars"></div>
+
     <div class="moon"></div>
 
-    <div class="particles">
-        <span class="particle" style="left:8%;top:25%;animation-delay:1s"></span>
-        <span class="particle" style="left:17%;top:60%;animation-delay:3s"></span>
-        <span class="particle" style="left:29%;top:35%;animation-delay:2s"></span>
-        <span class="particle" style="left:43%;top:20%;animation-delay:4s"></span>
-        <span class="particle" style="left:55%;top:70%;animation-delay:1s"></span>
-        <span class="particle" style="left:68%;top:40%;animation-delay:5s"></span>
-        <span class="particle" style="left:80%;top:25%;animation-delay:2s"></span>
-        <span class="particle" style="left:91%;top:65%;animation-delay:4s"></span>
-    </div>
-
     <div class="fog"></div>
+
     <div class="ocean"></div>
+
     <div class="ship"></div>
+
+    <div class="ship-light"></div>
 
     <div class="hero-content">
 
-        <div class="eyebrow">A CINEMATIC DIGITAL NOVEL</div>
+        <div class="hero-tag">
+            A DIGITAL NOVEL
+        </div>
 
         <h1>
-            <span>THE</span>
-            <span>HARBOUR</span>
+            <span class="top">THE</span>
+            <span class="main">HARBOUR</span>
         </h1>
 
-        <div class="subtitle">
+        <div class="hero-subtitle">
             CHAPTER ONE — THE BEGINNING
         </div>
 
-        <div class="author">
+        <div class="hero-author">
             — BY SABARISH P
         </div>
 
-        <a href="#chapter" class="begin">
+        <a href="#chapter" class="begin-btn">
             BEGIN READING
+            <span>→</span>
         </a>
 
     </div>
 
+    <div class="scroll-hint">
+        SCROLL TO ENTER
+    </div>
+
 </section>
 
-<!-- CONTENTS -->
+
+<!-- =========================
+     CONTENTS
+========================= -->
 
 <section class="contents" id="contents">
 
@@ -801,31 +1100,62 @@ footer{
 
         <div class="chapter-grid">
 
-            <div class="chapter reveal">
-                <div class="chapter-number">CHAPTER ONE</div>
-                <h3>The Beginning</h3>
+            <div class="chapter-card reveal">
 
-                <div class="chapter-status available">
+                <div class="card-number">
+                    CHAPTER ONE
+                </div>
+
+                <h3>
+                    The Beginning
+                </h3>
+
+                <div class="card-status available">
                     AVAILABLE NOW
                 </div>
+
             </div>
 
-            <div class="chapter reveal">
-                <div class="chapter-number">CHAPTER TWO</div>
-                <h3>The Return</h3>
 
-                <div class="chapter-status locked">
+            <div class="chapter-card reveal">
+
+                <div class="lock-icon">
+                    🔒
+                </div>
+
+                <div class="card-number">
+                    CHAPTER TWO
+                </div>
+
+                <h3>
+                    The Return
+                </h3>
+
+                <div class="card-status locked">
                     NEXT TUESDAY
                 </div>
+
             </div>
 
-            <div class="chapter reveal">
-                <div class="chapter-number">CHAPTER THREE</div>
-                <h3>The Final Game</h3>
 
-                <div class="chapter-status locked">
+            <div class="chapter-card reveal">
+
+                <div class="lock-icon">
+                    🔒
+                </div>
+
+                <div class="card-number">
+                    CHAPTER THREE
+                </div>
+
+                <h3>
+                    The Final Game
+                </h3>
+
+                <div class="card-status locked">
                     COMING SOON
                 </div>
+
             </div>
 
         </div>
@@ -834,30 +1164,29 @@ footer{
 
 </section>
 
-<!-- INTRO -->
+
+<!-- =========================
+     INTRO
+========================= -->
 
 <section class="intro">
 
     <div class="container">
 
-        <div class="intro-box reveal">
+        <div class="intro-inner reveal">
 
             <div class="section-label">
                 BEFORE THE STORY
             </div>
 
-            <h2 class="section-title">
+            <h2>
                 Every harbour has secrets.
             </h2>
 
             <p>
-                Beneath the ships, containers and endless movement of the harbour,
-                a dangerous network operates in the shadows. One ordinary delivery
-                will bring an ordinary man dangerously close to it.
-            </p>
-
-            <p>
-                What begins with a missing laptop will uncover something far darker.
+                Some secrets travel across oceans. Some are buried beneath
+                ordinary lives. And some are powerful enough to destroy
+                everyone who discovers them.
             </p>
 
         </div>
@@ -866,253 +1195,225 @@ footer{
 
 </section>
 
-<!-- CHAPTER -->
+
+<!-- =========================
+     CHAPTER ONE
+========================= -->
 
 <section class="story" id="chapter">
 
     <div class="container">
 
-        <div class="chapter-header reveal">
+        <div class="chapter-heading reveal">
 
-            <div class="chapter-label">
+            <div class="small">
                 CHAPTER ONE
             </div>
 
-            <h2>THE BEGINNING</h2>
+            <h2>
+                THE BEGINNING
+            </h2>
 
-            <p>THE HARBOUR</p>
+            <p>
+                THE HARBOUR
+            </p>
 
         </div>
 
-        <article class="story-text">
+
+        <article class="story-content">
+
 
             <p>
-                Near Thoothukudi, Tamil Nadu, a lorry slowly approached a police
-                checkpoint. It was late, and the road was almost empty. The officers
-                stopped the vehicle and asked the driver to open the container.
-                Inside were several beds and sofas, neatly arranged as if they were
-                ordinary furniture being transported somewhere. The officers checked
-                the shipment, questioned the driver and finally allowed the lorry
-                to continue.
+                The evening sky above Tuticorin was slowly turning dark as a heavily loaded lorry approached a police checkpoint near the harbour. The vehicle moved at a steady pace, its large container covered with dust from the long journey. As soon as it reached the checkpoint, a police officer raised his hand and ordered the driver to stop. Two officers walked around the vehicle while another approached the driver's window.
             </p>
 
             <p>
-                But the furniture was not what it seemed.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                When the lorry reached the harbour, several labourers immediately
-                surrounded it. They began unloading the furniture. One of them took
-                a sharp tool and cut open the side of a sofa.
+                “Open the container,” the officer ordered.
             </p>
 
             <p>
-                Packets were hidden inside.
+                The driver stepped down and unlocked the rear doors. The officers opened them and looked inside. Several beds and expensive-looking sofas were neatly arranged inside the container. Nothing appeared suspicious.
             </p>
 
             <p>
-                Drugs.
+                “What are you carrying?” the officer asked.
             </p>
 
             <p>
-                The labourers quickly removed the packets and carried them towards
-                a waiting ship. Within minutes, the drugs had disappeared into the
-                vessel.
+                “Furniture, sir,” the driver replied.
             </p>
+
+            <p>
+                The officer looked through the documents and then inspected the furniture once again. Everything seemed legitimate. After a few moments, he closed the container.
+            </p>
+
+            <p>
+                “Alright. You can go.”
+            </p>
+
+            <p>
+                The driver thanked him, climbed back into the lorry and continued toward the harbour.
+            </p>
+
+            <p>
+                The police had no idea that the furniture was nothing more than a disguise.
+            </p>
+
+
+            <div class="break">
+                ✦ &nbsp; ✦ &nbsp; ✦
+            </div>
+
+
+            <div class="scene-title reveal">
+                <span>The Harbour</span>
+            </div>
+
+
+            <p>
+                The lorry finally entered the harbour.
+            </p>
+
+            <p>
+                As soon as it reached a quiet area away from the main entrance, several workers rushed toward it. They opened the container and began unloading the furniture. One of the workers dragged a sofa to the side and looked around carefully before taking out a sharp tool. He cut through the back of the sofa.
+            </p>
+
+            <p>
+                His expression immediately changed.
+            </p>
+
+            <p>
+                Hidden inside were tightly packed packets of drugs.
+            </p>
+
+            <p>
+                He opened another sofa.
+            </p>
+
+            <p>
+                More packets.
+            </p>
+
+            <p>
+                The beds contained them too.
+            </p>
+
+            <p>
+                Within minutes, the workers had removed the hidden drugs from the furniture. They carried the packets toward a large ship waiting inside the harbour. One by one, the packages disappeared into the ship's containers.
+            </p>
+
+            <p>
+                The furniture was only a cover.
+            </p>
+
+            <p>
+                The real cargo was drugs.
+            </p>
+
+            <p>
+                And this was only one part of a much larger operation.
+            </p>
+
+
+            <div class="break">
+                ✦ &nbsp; ✦ &nbsp; ✦
+            </div>
+
+
+            <div class="scene-title reveal">
+                <span>Jack Wilson</span>
+            </div>
+
 
             <p>
                 A black Rolls-Royce slowly entered the harbour.
             </p>
 
             <p>
-                The window lowered.
+                The vehicle moved between the containers before stopping near the workers. Its windows were dark, making it difficult to see the person inside.
             </p>
 
             <p>
-                Jack Wilson looked outside.
+                The window slowly lowered.
             </p>
 
             <p>
-                "Is everything going good?"
+                A young man sat behind the wheel.
             </p>
 
             <p>
-                One of the labourers nodded.
+                Jack Wilson.
             </p>
 
             <p>
-                "Yes, sir."
+                He looked toward the workers and calmly asked, “Is everything going according to plan?”
             </p>
 
             <p>
-                Jack simply looked at the ship for a moment before driving away.
+                “Yes, sir,” one of the workers replied. “Everything is going as planned.”
             </p>
 
             <p>
-                Jack Wilson was a businessman.
+                Jack looked toward the ship for a few seconds.
             </p>
 
             <p>
-                But drugs were not something he personally used. For him, they were
-                only business.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Thousands of kilometres away in Los Angeles, Jack's ships arrived
-                at another harbour.
+                “Good.”
             </p>
 
             <p>
-                Workers opened the containers and began moving the cargo. Hidden
-                among the ordinary shipments was gold.
+                The window went back up.
             </p>
 
             <p>
-                Nearby, Daniel Carter stepped out of a swimming pool holding a glass
-                of alcohol. Unlike Jack, Daniel had completely surrendered himself
-                to addiction. Alcohol and drugs had become part of his everyday life.
+                The Rolls-Royce slowly moved away.
             </p>
 
             <p>
-                Jack and Daniel had known each other since childhood. Their friendship
-                had eventually become a business partnership, and together they had
-                built a dangerous criminal empire.
+                Jack Wilson was not an ordinary businessman. He was one of the men behind the illegal drug trade operating through the harbour. His business had spread far beyond Tuticorin, reaching places thousands of kilometres away.
             </p>
 
-            <div class="quote">
-                <p>
-                    "Friendship built the empire.<br>
-                    Money protected it."
-                </p>
-                <span>THE HARBOUR</span>
+            <p>
+                But Jack had one unusual rule.
+            </p>
+
+            <p>
+                He never used the products he sold.
+            </p>
+
+            <p>
+                He didn't take drugs.
+            </p>
+
+            <p>
+                He didn't drink alcohol.
+            </p>
+
+            <p>
+                He didn't smoke.
+            </p>
+
+            <p>
+                To Jack, drugs were simply business. He treated the entire operation like a financial transaction. Nothing more.
+            </p>
+
+            <p>
+                The ship eventually left the harbour, carrying its illegal cargo toward its destination.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>Los Angeles</span>
             </div>
 
+
             <p>
-                Back in Tamil Nadu, Ryan was simply waiting for a delivery.
+                After travelling across the sea, the ship finally reached Los Angeles.
             </p>
 
             <p>
-                He had ordered an expensive laptop online and paid several lakhs for
-                it. The company promised that it would arrive within a week.
-            </p>
-
-            <p>
-                A week passed.
-            </p>
-
-            <p>
-                Then another.
-            </p>
-
-            <p>
-                The laptop never arrived.
-            </p>
-
-            <p>
-                Ryan contacted the company again and again, but nobody gave him a
-                proper answer.
-            </p>
-
-            <p>
-                Finally, he went to the police.
-            </p>
-
-            <p>
-                The CCTV footage showed something strange.
-            </p>
-
-            <p>
-                The delivery lorry had entered the harbour on the exact date the
-                laptop was supposed to arrive.
-            </p>
-
-            <p>
-                Ryan decided to investigate.
-            </p>
-
-            <p>
-                He did not want drugs and illegal activities spreading through his
-                society. What had started as a missing laptop was becoming something
-                much larger.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Around the same time, one of Jack's drug shipments was moving along
-                the road.
-            </p>
-
-            <p>
-                Police vehicles were following it.
-            </p>
-
-            <p>
-                Jack was not inside the vehicle.
-            </p>
-
-            <p>
-                He was somewhere else, giving instructions through his phone.
-            </p>
-
-            <p>
-                His men noticed another lorry carrying legitimate products.
-            </p>
-
-            <p>
-                Within moments, the two operations crossed paths.
-            </p>
-
-            <p>
-                The containers were switched.
-            </p>
-
-            <p>
-                The driver of the legitimate lorry saw what had happened.
-            </p>
-
-            <p>
-                He could not be allowed to speak.
-            </p>
-
-            <p>
-                Jack's men killed him and set the remaining lorry on fire.
-            </p>
-
-            <p>
-                When the police arrived, they believed the burning vehicle was the
-                same lorry they had been following.
-            </p>
-
-            <p>
-                The drugs had already been moved.
-            </p>
-
-            <p>
-                Jack's operation continued.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Ryan eventually went to the harbour himself.
-            </p>
-
-            <p>
-                The labourers immediately became aggressive when he started asking
-                questions.
-            </p>
-
-            <p>
-                An argument turned into a fight.
-            </p>
-
-            <p>
-                Frightened, one labourer finally revealed the truth.
+                Workers unloaded the containers and began moving the cargo. The drugs were transferred carefully, while another shipment was being prepared.
             </p>
 
             <p>
@@ -1120,31 +1421,601 @@ footer{
             </p>
 
             <p>
-                Drugs.
+                The operation was larger than it appeared from the outside.
             </p>
 
             <p>
-                International transport.
+                Then a man casually walked out from a nearby swimming pool holding a bottle of alcohol.
             </p>
 
             <p>
-                Everything was happening through the harbour.
+                He looked completely relaxed.
             </p>
 
             <p>
-                Ryan gathered whatever evidence he could find.
+                His name was Daniel Carter.
             </p>
 
             <p>
-                He decided to go to Los Angeles.
+                Daniel was Jack's childhood friend and business partner. While Jack controlled the drug operation, Daniel was deeply involved in the gold business. Their partnership had existed for years, and both men trusted each other.
             </p>
 
             <p>
-                But after Ryan left, Jack arrived.
+                Daniel opened one of the drug packets, took some of the substance and consumed it without hesitation. He then took another drink from his bottle.
             </p>
 
             <p>
-                He learned that one of his labourers had spoken.
+                Unlike Jack, Daniel had no rules about what he consumed.
+            </p>
+
+            <p>
+                He was an alcoholic, and his addiction was becoming a part of his life.
+            </p>
+
+            <p>
+                But beneath his careless appearance was a man who understood the criminal world extremely well.
+            </p>
+
+            <p>
+                Jack and Daniel had grown up together.
+            </p>
+
+            <p>
+                Now they had become partners in a dangerous business.
+            </p>
+
+
+            <div class="story-quote reveal">
+
+                <p>
+                    “Friendship built the empire.<br>
+                    Money protected it.”
+                </p>
+
+                <small>
+                    THE HARBOUR
+                </small>
+
+            </div>
+
+
+            <div class="scene-title reveal">
+                <span>The Wrong Delivery</span>
+            </div>
+
+
+            <p>
+                Back in Tuticorin, a young man named Ryan was waiting for an expensive package.
+            </p>
+
+            <p>
+                He had ordered a new laptop online and paid lakhs for it. The order confirmation had promised that the laptop would arrive within a week.
+            </p>
+
+            <p>
+                Ryan was excited.
+            </p>
+
+            <p>
+                The laptop was important to him, and he had been waiting for the delivery.
+            </p>
+
+            <p>
+                A week passed.
+            </p>
+
+            <p>
+                Then another day.
+            </p>
+
+            <p>
+                Still nothing.
+            </p>
+
+            <p>
+                Eventually, the delivery date arrived.
+            </p>
+
+            <p>
+                A lorry carrying online products entered the area.
+            </p>
+
+            <p>
+                At almost the same time, one of Jack's drug shipments was moving through another route.
+            </p>
+
+            <p>
+                Everything was normal until Jack's men suddenly noticed something.
+            </p>
+
+            <p>
+                The police were following their vehicle.
+            </p>
+
+            <p>
+                One of the men immediately called Jack.
+            </p>
+
+            <p>
+                “Sir, the police are behind us.”
+            </p>
+
+            <p>
+                Jack was not inside the lorry.
+            </p>
+
+            <p>
+                He was somewhere else, but he immediately understood the danger.
+            </p>
+
+            <p>
+                “Keep moving,” Jack ordered over the phone. “Don't let them get close.”
+            </p>
+
+            <p>
+                The men continued driving.
+            </p>
+
+            <p>
+                Jack remained on the phone, thinking quickly.
+            </p>
+
+            <p>
+                Then one of his men noticed another lorry travelling nearby.
+            </p>
+
+            <p>
+                It was a legitimate delivery vehicle carrying online products.
+            </p>
+
+            <p>
+                Jack's voice became calm.
+            </p>
+
+            <p>
+                “Listen carefully. Get ahead of them. We're switching the containers.”
+            </p>
+
+            <p>
+                His men followed the instructions.
+            </p>
+
+            <p>
+                They forced the delivery lorry to stop at a suitable location on the highway.
+            </p>
+
+            <p>
+                The driver had no idea what was happening.
+            </p>
+
+            <p>
+                Jack's men dragged him out of the vehicle.
+            </p>
+
+            <p>
+                The two containers were switched.
+            </p>
+
+            <p>
+                The drugs were transferred into the legitimate product container.
+            </p>
+
+            <p>
+                The original drug container was then set on fire.
+            </p>
+
+            <p>
+                But Jack's men had one more problem.
+            </p>
+
+            <p>
+                The delivery driver had seen everything.
+            </p>
+
+            <p>
+                They could not leave him alive.
+            </p>
+
+            <p>
+                The driver was killed.
+            </p>
+
+            <p>
+                His body was left behind as the burning lorry began to disappear into flames.
+            </p>
+
+            <p>
+                The police eventually reached the location.
+            </p>
+
+            <p>
+                All they saw was a burning lorry.
+            </p>
+
+            <p>
+                They believed the vehicle they had been following had been destroyed.
+            </p>
+
+            <p>
+                They didn't know that Jack's men had already escaped with the real shipment.
+            </p>
+
+            <p>
+                Jack's drugs were safe.
+            </p>
+
+            <p>
+                The legitimate delivery vehicle, however, was now carrying something completely different.
+            </p>
+
+            <p>
+                Ryan's laptop was inside it.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>Two Weeks Later</span>
+            </div>
+
+
+            <p>
+                Ryan waited.
+            </p>
+
+            <p>
+                And waited.
+            </p>
+
+            <p>
+                Two weeks had passed, but his laptop still hadn't arrived.
+            </p>
+
+            <p>
+                He contacted the online company repeatedly.
+            </p>
+
+            <p>
+                There was no proper response.
+            </p>
+
+            <p>
+                Frustrated, Ryan went to the police station and began asking questions about the delivery.
+            </p>
+
+            <p>
+                During his search for information, he discovered something strange.
+            </p>
+
+            <p>
+                The delivery lorry had entered the harbour on the exact day his laptop was supposed to arrive.
+            </p>
+
+            <p>
+                Ryan looked at the CCTV footage again.
+            </p>
+
+            <p>
+                The lorry entered the harbour.
+            </p>
+
+            <p>
+                But it never appeared to leave.
+            </p>
+
+            <p>
+                Something was wrong.
+            </p>
+
+            <p>
+                Ryan wasn't just angry about losing his laptop.
+            </p>
+
+            <p>
+                He was a local man from Tuticorin.
+            </p>
+
+            <p>
+                This was his home.
+            </p>
+
+            <p>
+                He had seen the harbour his entire life, and he knew how important it was to the people around him.
+            </p>
+
+            <p>
+                The thought of drugs and illegal activities spreading through his hometown disturbed him.
+            </p>
+
+            <p>
+                He didn't want his society to be damaged by criminals.
+            </p>
+
+            <p>
+                Ryan decided to investigate.
+            </p>
+
+            <p>
+                He would find out what was happening inside that harbour.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Harbour</span>
+            </div>
+
+
+            <p>
+                Ryan went to the harbour.
+            </p>
+
+            <p>
+                The workers immediately noticed him.
+            </p>
+
+            <p>
+                “Go away!”
+            </p>
+
+            <p>
+                “You can't be here!”
+            </p>
+
+            <p>
+                Ryan refused to leave.
+            </p>
+
+            <p>
+                He wanted answers.
+            </p>
+
+            <p>
+                An argument quickly turned into a fight.
+            </p>
+
+            <p>
+                Ryan managed to defend himself, but after the struggle he grabbed one of the workers and demanded the truth.
+            </p>
+
+            <p>
+                “What is happening here?”
+            </p>
+
+            <p>
+                The worker looked terrified.
+            </p>
+
+            <p>
+                For several seconds, he remained silent.
+            </p>
+
+            <p>
+                Then he finally spoke.
+            </p>
+
+            <p>
+                “This isn't just a harbour.”
+            </p>
+
+            <p>
+                Ryan stared at him.
+            </p>
+
+            <p>
+                “What do you mean?”
+            </p>
+
+            <p>
+                The worker lowered his voice.
+            </p>
+
+            <p>
+                “Gold... and drugs.”
+            </p>
+
+            <p>
+                Ryan was shocked.
+            </p>
+
+            <p>
+                The harbour was being used as a centre for illegal business.
+            </p>
+
+            <p>
+                But Ryan didn't run.
+            </p>
+
+            <p>
+                Instead, he decided to expose it.
+            </p>
+
+            <p>
+                He needed evidence.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Infiltration</span>
+            </div>
+
+
+            <p>
+                Ryan gathered information from the frightened worker and secretly entered one of the ships being used by the criminal network.
+            </p>
+
+            <p>
+                He waited until the workers began moving the containers.
+            </p>
+
+            <p>
+                Then he slipped inside one of the drug containers.
+            </p>
+
+            <p>
+                He remained hidden while the workers moved it.
+            </p>
+
+            <p>
+                Minutes passed.
+            </p>
+
+            <p>
+                Nobody noticed him.
+            </p>
+
+            <p>
+                Eventually, the container was opened.
+            </p>
+
+            <p>
+                Ryan waited for the right moment before quietly climbing out.
+            </p>
+
+            <p>
+                A bodyguard suddenly spotted him.
+            </p>
+
+            <p>
+                The man shouted.
+            </p>
+
+            <p>
+                Ryan attacked before the alarm could spread.
+            </p>
+
+            <p>
+                After a fierce struggle, Ryan defeated the bodyguard.
+            </p>
+
+            <p>
+                He quickly took the man's uniform and mask.
+            </p>
+
+            <p>
+                Now he looked like one of them.
+            </p>
+
+            <p>
+                With the disguise, Ryan could move through the area without immediately attracting attention.
+            </p>
+
+            <p>
+                He had one goal.
+            </p>
+
+            <p>
+                Find the people behind the operation.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>Los Angeles</span>
+            </div>
+
+
+            <p>
+                Ryan eventually followed the information he had gathered and travelled to Los Angeles.
+            </p>
+
+            <p>
+                He wore the stolen bodyguard uniform and mask and entered Daniel Carter's residence.
+            </p>
+
+            <p>
+                Inside the house, Jack and Daniel were discussing their business.
+            </p>
+
+            <p>
+                Ryan stayed hidden and listened.
+            </p>
+
+            <p>
+                Daniel turned toward Jack.
+            </p>
+
+            <p>
+                “Don't worry, bro. All the documents are in my wardrobe.”
+            </p>
+
+            <p>
+                Ryan immediately understood.
+            </p>
+
+            <p>
+                Those documents could contain everything he needed.
+            </p>
+
+            <p>
+                He waited until the right moment.
+            </p>
+
+            <p>
+                Then he quietly entered the room and took the documents.
+            </p>
+
+            <p>
+                Before anyone could stop him, he ran.
+            </p>
+
+            <p>
+                Jack realized what had happened.
+            </p>
+
+            <p>
+                “Someone took the documents!”
+            </p>
+
+            <p>
+                Daniel immediately followed him.
+            </p>
+
+            <p>
+                Ryan reached a motorcycle and sped away.
+            </p>
+
+            <p>
+                Daniel jumped into his BMW and started the engine.
+            </p>
+
+            <p>
+                Jack took another motorcycle.
+            </p>
+
+            <p>
+                The chase began.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Chase</span>
+            </div>
+
+
+            <p>
+                Ryan drove through the streets at full speed.
+            </p>
+
+            <p>
+                Daniel followed closely behind, but the road suddenly became too narrow for his BMW.
+            </p>
+
+            <p>
+                He was forced to stop.
+            </p>
+
+            <p>
+                Jack continued the pursuit.
+            </p>
+
+            <p>
+                He abandoned his motorcycle and climbed onto a nearby building.
+            </p>
+
+            <p>
+                From the rooftop, he continued following Ryan.
+            </p>
+
+            <p>
+                Ryan ran through the streets.
             </p>
 
             <p>
@@ -1152,88 +2023,11 @@ footer{
             </p>
 
             <p>
-                The harbour became silent.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Ryan secretly entered one of the ships and hid inside a container.
+                A gunshot echoed through the area.
             </p>
 
             <p>
-                Hours later, the container was opened.
-            </p>
-
-            <p>
-                Ryan suddenly attacked the bodyguard standing nearby.
-            </p>
-
-            <p>
-                He took the man's uniform and mask.
-            </p>
-
-            <p>
-                Nobody would recognise him.
-            </p>
-
-            <p>
-                At least, that was the plan.
-            </p>
-
-            <p>
-                In Los Angeles, Ryan entered Daniel's home disguised as one of the
-                bodyguards.
-            </p>
-
-            <p>
-                Jack and Daniel were talking inside.
-            </p>
-
-            <p>
-                Daniel was drunk.
-            </p>
-
-            <p>
-                He pointed towards his wardrobe.
-            </p>
-
-            <p>
-                "Don't worry bro, every documents are there in my wardrobe."
-            </p>
-
-            <p>
-                Ryan waited for the right moment.
-            </p>
-
-            <p>
-                Then he stole the documents.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Daniel noticed.
-            </p>
-
-            <p>
-                He jumped into his BMW and began chasing Ryan.
-            </p>
-
-            <p>
-                Jack followed on a motorcycle.
-            </p>
-
-            <p>
-                Ryan ran through the streets and climbed towards the rooftops.
-            </p>
-
-            <p>
-                Jack followed him.
-            </p>
-
-            <p>
-                A gunshot struck Ryan's leg.
+                The bullet struck Ryan's leg.
             </p>
 
             <p>
@@ -1241,42 +2035,95 @@ footer{
             </p>
 
             <p>
-                At that exact moment, a bus crossed between them.
+                Jack moved toward him.
             </p>
 
             <p>
-                When Jack reached the other side, Ryan had disappeared.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Ryan returned to India.
+                But suddenly, a bus crossed between them.
             </p>
 
             <p>
-                He handed the documents to the police.
+                For a moment, Jack couldn't see Ryan.
             </p>
 
             <p>
-                Together, Ryan and a police officer planned an operation based on
-                the transport details.
+                When the bus passed, Ryan was gone.
             </p>
 
             <p>
-                The day came.
+                Jack looked around.
             </p>
 
             <p>
-                A truck arrived at the harbour.
+                Nothing.
             </p>
 
             <p>
-                Police surrounded it.
+                Ryan had escaped.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Return</span>
+            </div>
+
+
+            <p>
+                Ryan returned to India carrying the stolen documents.
             </p>
 
             <p>
-                Ryan stood nearby.
+                He handed them to the police.
+            </p>
+
+            <p>
+                The documents contained information about another upcoming shipment.
+            </p>
+
+            <p>
+                Ryan and one of the police officers studied the details carefully.
+            </p>
+
+            <p>
+                They found the date.
+            </p>
+
+            <p>
+                They found the location.
+            </p>
+
+            <p>
+                They found the shipment information.
+            </p>
+
+            <p>
+                A plan was made.
+            </p>
+
+            <p>
+                They would wait for the next operation and arrest everyone involved.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Trap</span>
+            </div>
+
+
+            <p>
+                The day finally arrived.
+            </p>
+
+            <p>
+                Ryan and the police waited inside the harbour.
+            </p>
+
+            <p>
+                After some time, a truck entered.
+            </p>
+
+            <p>
+                They surrounded it.
             </p>
 
             <p>
@@ -1284,119 +2131,229 @@ footer{
             </p>
 
             <p>
-                Empty.
+                Nothing.
             </p>
 
             <p>
-                Then footsteps echoed across the harbour.
+                No drugs.
             </p>
 
             <p>
-                A man walked towards them holding a shotgun.
+                No gold.
             </p>
 
             <p>
-                Michael Brooks.
+                The police looked confused.
             </p>
 
             <p>
-                Behind him were armed bodyguards.
+                Then Ryan heard something.
             </p>
 
             <p>
-                The police tried to react.
+                A movement from inside the container.
             </p>
 
             <p>
-                Gunfire erupted.
+                A man slowly appeared.
             </p>
 
             <p>
-                Michael killed the police officer.
+                He was sitting calmly with a shotgun in his hands.
             </p>
 
             <p>
-                Ryan fought back.
+                Several armed men stood behind him.
             </p>
 
             <p>
-                Then Jack and Daniel arrived.
+                The man's name was Michael Brooks.
             </p>
 
             <p>
-                Daniel was drunk and could barely aim properly.
+                Nobody knew why he was there.
             </p>
 
             <p>
-                Ryan attacked him and knocked him down.
+                Nobody knew what he was planning.
             </p>
 
             <p>
-                The fight became chaos.
+                But they were about to find out.
             </p>
 
             <p>
-                Ryan finally confronted Michael.
+                Michael raised the shotgun.
             </p>
 
             <p>
-                One final struggle.
+                The first shot echoed through the harbour.
             </p>
 
             <p>
-                Michael Brooks fell.
+                Chaos erupted.
             </p>
 
             <p>
-                Dead.
-            </p>
-
-            <div class="scene-break">✦ ✦ ✦</div>
-
-            <p>
-                Jack attacked Ryan next.
+                The police fought back.
             </p>
 
             <p>
-                Ryan shot him.
+                Ryan tried to survive the attack.
             </p>
 
             <p>
-                Jack fell.
+                During the battle, Michael shot the police officer.
             </p>
 
             <p>
-                But he was still alive.
+                Ryan was now alone.
             </p>
 
             <p>
-                Ryan tied Jack and Daniel to a boat and pushed it towards the open
-                sea.
+                He attacked Michael.
             </p>
 
             <p>
-                Then Ryan returned home.
+                The fight became brutal.
             </p>
 
             <p>
-                For the first time in weeks, he could finally use the laptop he had
-                originally ordered.
+                At the same time, Jack and Daniel arrived.
             </p>
 
             <p>
-                Everything seemed finished.
+                Daniel was drunk.
             </p>
 
             <p>
-                Until his phone rang.
+                He tried to aim at Ryan, but his vision was blurred and his movements were unstable.
             </p>
 
             <p>
-                Ryan answered.
+                Ryan kicked him.
             </p>
 
             <p>
-                He heard silence.
+                Daniel fell to the ground.
+            </p>
+
+            <p>
+                The fight continued.
+            </p>
+
+            <p>
+                Ryan eventually managed to overpower Michael.
+            </p>
+
+            <p>
+                Michael Brooks was dead.
+            </p>
+
+            <p>
+                But Ryan's fight wasn't over.
+            </p>
+
+            <p>
+                Jack attacked him.
+            </p>
+
+            <p>
+                Ryan managed to shoot Jack.
+            </p>
+
+            <p>
+                Jack was injured but survived.
+            </p>
+
+            <p>
+                Ryan continued fighting until he finally managed to overpower both Jack and Daniel.
+            </p>
+
+            <p>
+                He tied them to a small boat and pushed it toward the open sea.
+            </p>
+
+            <p>
+                Ryan watched as the boat slowly disappeared into the distance.
+            </p>
+
+            <p>
+                He believed it was over.
+            </p>
+
+            <p>
+                Jack Wilson and Daniel Carter were gone.
+            </p>
+
+
+            <div class="scene-title reveal">
+                <span>The Call</span>
+            </div>
+
+
+            <p>
+                Several days passed.
+            </p>
+
+            <p>
+                Life slowly returned to normal.
+            </p>
+
+            <p>
+                Ryan finally received a chance to live peacefully.
+            </p>
+
+            <p>
+                He sat with his new laptop, thinking about everything that had happened.
+            </p>
+
+            <p>
+                The harbour.
+            </p>
+
+            <p>
+                The drugs.
+            </p>
+
+            <p>
+                The gold.
+            </p>
+
+            <p>
+                Jack.
+            </p>
+
+            <p>
+                Daniel.
+            </p>
+
+            <p>
+                He believed the nightmare was finally finished.
+            </p>
+
+            <p>
+                Then his phone rang.
+            </p>
+
+            <p>
+                Unknown Number.
+            </p>
+
+            <p>
+                Ryan stared at the screen.
+            </p>
+
+            <p>
+                After a moment, he answered.
+            </p>
+
+            <p>
+                “Hello?”
+            </p>
+
+            <p>
+                There was silence.
             </p>
 
             <p>
@@ -1404,39 +2361,87 @@ footer{
             </p>
 
             <p>
-                Ryan looked around.
+                Jack.
             </p>
 
             <p>
-                Somewhere far away, surrounded by darkness and fire, Jack and Daniel
-                were standing among hundreds of dead men.
+                Ryan's face changed.
             </p>
 
             <p>
-                Blood flowed across the ground.
+                A video appeared on the screen.
             </p>
 
             <p>
-                Flames burned behind them.
+                Jack and Daniel were standing in the middle of a burning forest.
             </p>
 
             <p>
-                Jack looked directly towards the camera.
+                Fire surrounded them.
+            </p>
+
+            <p>
+                Hundreds of dead men lay scattered across the ground.
+            </p>
+
+            <p>
+                Blood covered the earth.
+            </p>
+
+            <p>
+                Their faces were stained with blood.
+            </p>
+
+            <p>
+                Ryan couldn't believe his eyes.
+            </p>
+
+            <p>
+                Jack slowly looked into the camera.
             </p>
 
             <p>
                 Daniel stood beside him.
             </p>
 
-            <div class="quote">
+            <p>
+                Neither man looked afraid.
+            </p>
+
+
+            <div class="story-quote reveal">
 
                 <p>
-                    "We will be back to kill you."
+                    “We will be back to kill you.”
                 </p>
 
-                <span>JACK &amp; DANIEL</span>
+                <small>
+                    JACK &amp; DANIEL
+                </small>
 
             </div>
+
+
+            <p>
+                The call ended.
+            </p>
+
+            <p>
+                Ryan remained frozen.
+            </p>
+
+            <p>
+                The screen went black.
+            </p>
+
+            <p>
+                Somewhere far away, the fire continued to burn.
+            </p>
+
+            <p>
+                And Jack Wilson was still alive.
+            </p>
+
 
         </article>
 
@@ -1444,27 +2449,36 @@ footer{
 
 </section>
 
-<!-- ENDING -->
+
+<!-- =========================
+     ENDING
+========================= -->
 
 <section class="ending">
 
+    <div class="fire-glow"></div>
+
     <div class="ending-content reveal">
 
-        <div class="ending-small">
-            THE STORY CONTINUES
+        <div class="ending-top">
+            THE STORY CONTINUES...
         </div>
 
-        <h2>CHAPTER TWO</h2>
+        <h2>
+            CHAPTER TWO
+        </h2>
 
-        <div class="ending-line">
+        <div class="ending-message">
             The Return
         </div>
 
-        <div class="continue">
+        <div class="ending-line"></div>
+
+        <div class="next-chapter">
             NEXT TUESDAY
         </div>
 
-        <div class="next">
+        <div class="next-date">
             THE HARBOUR • BY SABARISH P
         </div>
 
@@ -1472,34 +2486,38 @@ footer{
 
 </section>
 
-<!-- AUTHOR -->
+
+<!-- =========================
+     AUTHOR
+========================= -->
 
 <section class="author-section">
 
     <div class="container">
 
-        <div class="author-card reveal">
-
-            <div class="author-mark">
-                SP
-            </div>
-
-            <h2>Sabarish P</h2>
-
-            <p>
-                An original story written for readers who enjoy darkness,
-                suspense, betrayal and unexpected turns.
-            </p>
-
+        <div class="author-symbol reveal">
+            SP
         </div>
+
+        <h2 class="reveal">
+            Sabarish P
+        </h2>
+
+        <p class="reveal">
+            THE HARBOUR is an original fictional story about friendship,
+            ambition, betrayal, crime and the consequences of choosing
+            the wrong path.
+        </p>
 
     </div>
 
 </section>
 
+
 <footer>
-    THE HARBOUR © 2026 • A DIGITAL NOVEL BY SABARISH P
+    THE HARBOUR © 2026 • BY SABARISH P
 </footer>
+
 
 <script>
 
@@ -1507,14 +2525,15 @@ footer{
    LOADER
 ========================= */
 
-window.addEventListener("load",()=>{
+window.addEventListener("load",function(){
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
-        document.getElementById("loader")
-        .classList.add("hide");
+        document
+            .getElementById("loader")
+            .classList.add("hide");
 
-    },900);
+    },1000);
 
 });
 
@@ -1523,40 +2542,45 @@ window.addEventListener("load",()=>{
    READING PROGRESS
 ========================= */
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll",function(){
 
     const scrollTop =
         window.scrollY;
 
-    const height =
+    const documentHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
 
-    const progress =
-        (scrollTop / height) * 100;
+    const percentage =
+        (scrollTop / documentHeight) * 100;
 
-    document.getElementById("progress")
-    .style.width = progress + "%";
+    document
+        .getElementById("progress")
+        .style.width = percentage + "%";
 
 });
 
 
 /* =========================
-   SCROLL REVEALS
+   REVEAL ANIMATION
 ========================= */
 
-const reveals =
+const revealElements =
     document.querySelectorAll(".reveal");
 
-const observer =
+const revealObserver =
     new IntersectionObserver(
-        entries => {
+        function(entries){
 
-            entries.forEach(entry => {
+            entries.forEach(function(entry){
 
                 if(entry.isIntersecting){
 
                     entry.target.classList.add("show");
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
 
                 }
 
@@ -1568,40 +2592,73 @@ const observer =
         }
     );
 
-reveals.forEach(el=>{
-    observer.observe(el);
+revealElements.forEach(function(element){
+
+    revealObserver.observe(element);
+
 });
 
 
 /* =========================
-   RANDOM ATMOSPHERIC PARTICLES
+   EXTRA PARTICLES
 ========================= */
 
-const particleContainer =
-    document.querySelector(".particles");
+const hero =
+    document.querySelector(".hero");
 
-for(let i=0;i<25;i++){
+for(let i=0;i<35;i++){
 
-    const p =
+    const particle =
         document.createElement("span");
 
-    p.className="particle";
-
-    p.style.left =
+    particle.style.position="absolute";
+    particle.style.width=
+        Math.random()*2+1+"px";
+    particle.style.height=
+        particle.style.width;
+    particle.style.borderRadius="50%";
+    particle.style.background="rgba(255,255,255,.5)";
+    particle.style.left=
         Math.random()*100+"%";
+    particle.style.top=
+        Math.random()*85+"%";
+    particle.style.opacity=
+        Math.random()*.45;
+    particle.style.pointerEvents="none";
+    particle.style.animation=
+        "floatParticle "+
+        (5+Math.random()*8)+"s infinite ease-in-out";
+    particle.style.animationDelay=
+        Math.random()*6+"s";
 
-    p.style.top =
-        Math.random()*90+"%";
-
-    p.style.animationDelay =
-        Math.random()*7+"s";
-
-    p.style.animationDuration =
-        5 + Math.random()*7+"s";
-
-    particleContainer.appendChild(p);
+    hero.appendChild(particle);
 
 }
+
+
+/* Particle animation */
+
+const particleStyle =
+document.createElement("style");
+
+particleStyle.innerHTML=`
+
+@keyframes floatParticle{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:.1;
+    }
+
+    50%{
+        transform:translateY(-70px);
+        opacity:.7;
+    }
+
+}
+`;
+
+document.head.appendChild(particleStyle);
 
 </script>
 
