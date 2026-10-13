@@ -3,1012 +3,565 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090608">
-<meta name="description" content="The Harbour — Chapter Two: The Return, by Sabarish P.">
-<title>Chapter Two: The Return | THE HARBOUR</title>
+<meta name="theme-color" content="#08090d">
+
+<title>THE RETURN | THE HARBOUR — Chapter Two</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg: #090608;
-    --red: #b5122a;
-    --bright: #f02d43;
-    --muted: #a99ca0;
-    --white: #f3edf0;
-    --line: rgba(224,31,54,.28);
+    --bg: #08090d;
+    --panel: #101117;
+    --red: #a51f32;
+    --bright-red: #ff344d;
+    --silver: #e7e8ed;
+    --muted: #9a9ba8;
+    --line: rgba(255,255,255,.12);
 }
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    background: var(--bg);
 }
 
 body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--white);
-    font-family: Inter, Arial, sans-serif;
+    color: var(--silver);
+    background:
+        radial-gradient(ellipse at 50% 0%, #291016 0%, transparent 48%),
+        var(--bg);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.9;
     overflow-x: hidden;
 }
 
-body::before {
+/* Reading progress */
+
+#readingProgress {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, #6e0f20, #ff344d, #f3c2c8);
+    box-shadow: 0 0 14px #ff344d;
+}
+
+/* Atmospheric background */
+
+.atmosphere {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.atmosphere::before {
     content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -2;
+    position: absolute;
+    inset: -30%;
     background:
-        radial-gradient(ellipse at 15% 8%, rgba(125,5,24,.3), transparent 34%),
-        radial-gradient(ellipse at 90% 42%, rgba(91,4,18,.24), transparent 36%),
-        linear-gradient(180deg, #10070b, #090608 48%, #100609);
+        radial-gradient(ellipse at 20% 30%, rgba(115,16,35,.16), transparent 36%),
+        radial-gradient(ellipse at 80% 65%, rgba(42,57,83,.13), transparent 38%);
+    animation: atmosphereDrift 18s ease-in-out infinite alternate;
 }
 
-.grain {
+.atmosphere::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .17;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+}
+
+@keyframes atmosphereDrift {
+    from { transform: translate3d(-2%, -1%, 0) scale(1); }
+    to   { transform: translate3d(2%, 2%, 0) scale(1.1); }
+}
+
+/* Floating embers */
+
+.embers {
     position: fixed;
     inset: 0;
-    z-index: 5;
+    z-index: 1;
+    overflow: hidden;
     pointer-events: none;
-    opacity: .10;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
 }
 
-.topbar {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px clamp(18px, 5vw, 70px);
-    border-bottom: 1px solid var(--line);
-    background: rgba(8,5,7,.72);
+.ember {
+    position: absolute;
+    bottom: -20px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ff5366;
+    box-shadow: 0 0 12px 2px rgba(255,52,77,.5);
+    opacity: 0;
+    animation: rise linear infinite;
 }
 
-.brand {
-    font-family: Cinzel, serif;
-    font-weight: 700;
-    letter-spacing: 4px;
-    font-size: 13px;
+@keyframes rise {
+    0% {
+        transform: translate3d(0, 0, 0) scale(.5);
+        opacity: 0;
+    }
+    15% { opacity: .75; }
+    80% { opacity: .45; }
+    100% {
+        transform: translate3d(45px, -110vh, 0) scale(1.4);
+        opacity: 0;
+    }
 }
 
-.toplabel {
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: #c9aeb3;
-}
+/* Hero */
 
 .hero {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 90px 22px 80px;
+    min-height: 100svh;
     position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 22px 110px;
     overflow: hidden;
-    border-bottom: 1px solid var(--line);
+    background:
+        linear-gradient(to bottom, rgba(8,9,13,.2), rgba(8,9,13,.55) 55%, #08090d 100%),
+        radial-gradient(ellipse at 50% 45%, rgba(125,19,39,.22), transparent 55%);
 }
 
 .hero::before {
     content: "";
     position: absolute;
-    width: min(700px, 100vw);
-    height: min(700px, 100vw);
-    border: 1px solid rgba(202,18,42,.12);
+    width: min(76vw, 680px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,76,95,.13);
     border-radius: 50%;
     box-shadow:
-        0 0 0 45px rgba(202,18,42,.025),
-        0 0 0 100px rgba(202,18,42,.02);
-    animation: pulse 7s ease-in-out infinite;
+        0 0 70px rgba(165,31,50,.08),
+        inset 0 0 70px rgba(165,31,50,.06);
+    animation: sealPulse 7s ease-in-out infinite;
+    z-index: -1;
 }
 
 .hero::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(122,7,26,.11), transparent);
-    pointer-events: none;
+    width: min(60vw, 480px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 850px;
+@keyframes sealPulse {
+    0%, 100% { transform: scale(.96); opacity: .6; }
+    50% { transform: scale(1.04); opacity: 1; }
 }
 
 .eyebrow {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: #e44859;
-    font-weight: 700;
-    margin-bottom: 24px;
+    color: #d1a5aa;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    animation: fadeUp 1s .1s both;
 }
 
 .hero h1 {
-    font-family: Cinzel, serif;
-    font-size: clamp(42px, 9vw, 96px);
-    line-height: 1.05;
-    letter-spacing: clamp(3px, 1vw, 10px);
-    margin: 0;
-    text-shadow: 0 0 32px rgba(200,16,39,.3);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.7rem, 9vw, 7rem);
+    font-weight: 800;
+    letter-spacing: .07em;
+    line-height: 1.13;
+    color: #fff;
+    text-shadow:
+        0 0 20px rgba(255,52,77,.2),
+        0 0 70px rgba(165,31,50,.24);
+    animation: titleReveal 1.5s .2s both;
 }
 
 .hero h1 span {
     display: block;
-    color: #bd172f;
-    font-size: .48em;
-    letter-spacing: clamp(6px, 1.5vw, 14px);
-    margin-top: 20px;
+    color: var(--bright-red);
+    font-size: .39em;
+    font-weight: 500;
+    letter-spacing: .42em;
+    margin-top: 24px;
+    text-shadow: 0 0 28px rgba(255,52,77,.38);
 }
 
-.hero-rule {
-    height: 2px;
-    width: 100px;
-    background: linear-gradient(90deg, transparent, var(--bright), transparent);
-    margin: 35px auto;
+.title-rule {
+    height: 1px;
+    width: min(300px, 65vw);
+    margin: 34px auto 25px;
+    background: linear-gradient(90deg, transparent, #a51f32, #f4b5bd, #a51f32, transparent);
+    box-shadow: 0 0 15px rgba(255,52,77,.3);
+    animation: expandRule 1.5s .6s both;
 }
 
-.hero p {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: #b9a7ac;
-    line-height: 1.8;
+.hero-note {
+    color: #a8a8b2;
+    font-size: .79rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    animation: fadeUp 1s .8s both;
 }
 
 .scroll-cue {
-    margin-top: 55px;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: #866f76;
-    animation: float 2.5s ease-in-out infinite;
+    position: absolute;
+    bottom: 36px;
+    color: #777986;
+    font-size: .67rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    animation: fadeUp 1s 1s both;
 }
 
-main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px 22px 100px;
-}
-
-.story-note {
-    max-width: 650px;
-    margin: 44px auto 55px;
-    text-align: center;
-    color: #b9aeb1;
-    font-size: 12px;
-    line-height: 1.9;
-}
-
-.story-note strong {
-    color: #e24b5b;
-    letter-spacing: 2px;
-    font-size: 9px;
+.scroll-cue::after {
+    content: "";
     display: block;
-    margin-bottom: 10px;
+    width: 1px;
+    height: 35px;
+    margin: 12px auto 0;
+    background: linear-gradient(#ff344d, transparent);
+    animation: cueMove 1.6s infinite;
+}
+
+@keyframes cueMove {
+    0%, 100% { transform: scaleY(.6); transform-origin: top; opacity: .45; }
+    50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes titleReveal {
+    from { opacity: 0; transform: translateY(25px); filter: blur(9px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes expandRule {
+    from { transform: scaleX(.1); opacity: 0; }
+    to { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Story area */
+
+.story-wrap {
+    position: relative;
+    z-index: 2;
+    width: min(790px, 100%);
+    margin: 0 auto;
+    padding: 0 25px 100px;
+}
+
+.story-top {
+    text-align: center;
+    margin: 0 auto 55px;
+    padding: 30px 20px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.story-top p {
+    color: #b9bac5;
+    font-size: .82rem;
+    letter-spacing: .07em;
+}
+
+.story-top strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    color: #e7b0b7;
+    letter-spacing: .15em;
+    font-size: .9rem;
+    margin-bottom: 8px;
 }
 
 .story {
-    position: relative;
-    max-width: 700px;
-    margin: 0 auto;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(16px, 2.2vw, 19px);
-    line-height: 1.95;
-    letter-spacing: .08px;
-    color: #e5dce0;
-}
-
-.story::before {
-    content: "";
-    position: absolute;
-    left: -22px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(
-        transparent,
-        var(--red) 12%,
-        rgba(181,18,42,.18) 80%,
-        transparent
-    );
-}
-
-.story p {
-    margin: 0 0 18px;
-    white-space: pre-line;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2.3vw, 1.09rem);
+    font-weight: 400;
+    line-height: 2.05;
+    color: #d2d2d9;
     overflow-wrap: anywhere;
 }
 
-.story .scene-break {
+.story p {
+    margin: 0 0 25px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.story p.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scene separators */
+
+.scene-divider {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    margin: 48px 0;
+    color: #d43a50;
+    font-family: 'Cinzel', serif;
+    font-size: .8rem;
+    letter-spacing: .4em;
+    opacity: .9;
+}
+
+.scene-divider::before,
+.scene-divider::after {
+    content: "";
     height: 1px;
-    width: 100%;
-    margin: 46px 0;
-    background: linear-gradient(90deg, transparent, rgba(201,25,48,.6), transparent);
+    flex: 1;
+    background: linear-gradient(90deg, transparent, rgba(255,52,77,.6));
+}
+
+.scene-divider::after {
+    background: linear-gradient(90deg, rgba(255,52,77,.6), transparent);
+}
+
+/* Final card */
+
+.ending {
     position: relative;
-}
-
-.story .scene-break::after {
-    content: "✦";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 14px;
-    background: var(--bg);
-    color: #bd1b33;
-    font-size: 12px;
-}
-
-.story .impact {
-    color: #ff5264;
-    font-family: Cinzel, serif;
-    letter-spacing: 2px;
-}
-
-.story .reveal {
-    color: #fff;
-    text-shadow: 0 0 22px rgba(233,28,54,.38);
-    font-family: Cinzel, serif;
-    letter-spacing: 1.5px;
-}
-
-.story .final-line {
-    font-family: Cinzel, serif;
-    color: #ef344b;
-    letter-spacing: 2px;
-    font-size: 1.08em;
-}
-
-.end-card {
+    margin-top: 90px;
+    padding: 60px 25px;
     text-align: center;
-    padding: 85px 18px 20px;
-    margin-top: 30px;
-    position: relative;
+    border: 1px solid rgba(255,52,77,.23);
+    background:
+        linear-gradient(135deg, rgba(94,14,28,.22), transparent 55%),
+        rgba(13,14,20,.75);
+    box-shadow: 0 0 65px rgba(105,14,30,.1);
+    overflow: hidden;
 }
 
-.end-card::before {
+.ending::before {
     content: "";
     position: absolute;
     left: 50%;
-    top: 25px;
-    height: 45px;
-    width: 1px;
-    background: linear-gradient(transparent, var(--bright), transparent);
+    top: -100px;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 160px;
+    background: rgba(255,52,77,.1);
+    filter: blur(65px);
 }
 
-.end-kicker {
-    color: #a99299;
-    font-size: 9px;
-    letter-spacing: 4px;
-    margin-bottom: 18px;
+.ending-label {
+    position: relative;
+    color: #a5a5b1;
+    font-size: .68rem;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    margin-bottom: 17px;
 }
 
-.end-card h2 {
-    font-family: Cinzel, serif;
-    font-size: clamp(32px, 7vw, 62px);
-    letter-spacing: 5px;
-    margin: 0;
-    color: #c81932;
-    text-shadow: 0 0 30px rgba(200,25,50,.22);
+.ending h2 {
+    position: relative;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    font-size: clamp(1.7rem, 6vw, 3rem);
+    letter-spacing: .1em;
+    text-shadow: 0 0 30px rgba(255,52,77,.3);
 }
 
-.end-card p {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #a99aa0;
-    line-height: 2;
-    margin-top: 24px;
+.ending .credit {
+    position: relative;
+    color: #c3a0a5;
+    margin-top: 28px;
+    font-size: .9rem;
+    letter-spacing: .08em;
 }
 
 .back-link {
     display: inline-block;
-    margin-top: 28px;
-    color: #cdbcc1;
+    margin-top: 35px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255,255,255,.2);
+    color: #eee;
     text-decoration: none;
-    font-size: 9px;
-    letter-spacing: 2px;
-    border: 1px solid rgba(210,30,51,.45);
-    padding: 13px 18px;
-    transition: .25s;
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: .3s ease;
 }
 
 .back-link:hover {
-    background: #78101f;
-    color: white;
-    border-color: #ef344b;
+    border-color: var(--bright-red);
+    background: rgba(165,31,50,.15);
+    box-shadow: 0 0 25px rgba(255,52,77,.15);
+    transform: translateY(-2px);
 }
 
+/* Footer */
+
 footer {
-    border-top: 1px solid var(--line);
-    padding: 25px 18px;
+    position: relative;
+    z-index: 2;
     text-align: center;
-    color: #76666c;
-    font-size: 9px;
-    letter-spacing: 2px;
+    padding: 25px 15px 35px;
+    color: #646570;
+    font-size: .7rem;
+    letter-spacing: .13em;
 }
 
 footer span {
-    color: #b11b30;
+    color: #ad3346;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(.96);
-        opacity: .5;
-    }
-
-    50% {
-        transform: scale(1.04);
-        opacity: 1;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(6px);
-    }
-}
+/* Responsive */
 
 @media (max-width: 600px) {
-    .hero {
-        min-height: 58vh;
-        padding-top: 70px;
-    }
-
-    .topbar {
-        padding: 18px;
-    }
-
-    .toplabel {
-        font-size: 8px;
-    }
-
-    .story {
-        line-height: 1.85;
-    }
-
-    .story::before {
-        left: -12px;
-    }
-
-    .story-note {
-        font-size: 11px;
-    }
-
-    .hero p {
-        font-size: 9px;
-        letter-spacing: 2px;
-    }
+    .hero { min-height: 90svh; padding-inline: 18px; }
+    .eyebrow { letter-spacing: .25em; font-size: .63rem; }
+    .hero h1 { letter-spacing: .025em; }
+    .hero h1 span { letter-spacing: .28em; }
+    .story-wrap { padding-inline: 22px; }
+    .story { line-height: 1.95; }
+    .ending { padding: 48px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
     }
 }
 </style>
 </head>
 
 <body>
+<div id="readingProgress"></div>
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="embers" id="embers" aria-hidden="true"></div>
 
-<div class="grain"></div>
+<header class="hero">
+    <div class="eyebrow">The Harbour · A Cinematic Thriller</div>
 
-<header class="topbar">
-    <div class="brand">THE HARBOUR</div>
-    <div class="toplabel">A CRIME THRILLER · CHAPTER 02</div>
+    <h1>
+        THE HARBOUR
+        <span>CHAPTER TWO</span>
+        <div class="title-rule"></div>
+        <span style="font-size:.48em;letter-spacing:.2em;color:#f2e9eb;margin-top:0">
+            THE RETURN
+        </span>
+    </h1>
+
+    <p class="hero-note">Every return has a price.</p>
+
+    <a class="scroll-cue" href="#story" style="text-decoration:none">Enter the story</a>
 </header>
 
-<section class="hero">
-    <div class="hero-inner">
-        <div class="eyebrow">THE STORY CONTINUES</div>
-
-        <h1>
-            THE RETURN
-            <span>CHAPTER TWO</span>
-        </h1>
-
-        <div class="hero-rule"></div>
-
-        <p>REVENGE NEVER SLEEPS. THE PAST NEVER STAYS BURIED.</p>
-
-        <div class="scroll-cue">
-            SCROLL TO ENTER THE DARKNESS ↓
-        </div>
-    </div>
-</section>
-
-<main>
-
-    <div class="story-note">
-        <strong>PREVIOUSLY IN THE HARBOUR</strong>
-        After the chaos surrounding Ryan's exposure of the transport network,
-        the fate of Jack Wilson and Daniel Carter remained uncertain.
-        The sea holds the next answer.
+<main class="story-wrap" id="story">
+    <div class="story-top">
+        <strong>CHAPTER TWO — THE RETURN</strong>
+        <p>The past never stays buried.</p>
     </div>
 
-    <article class="story" id="story"></article>
+    <article class="story" id="storyContent">
 
-    <section class="end-card">
-        <div class="end-kicker">THE NIGHTMARE HAS ONLY BEGUN</div>
+        <!--
+        IMPORTANT:
+        Paste your ORIGINAL Chapter Two story below.
+        Keep every sentence, dialogue, punctuation mark,
+        scene break, and the ending exactly as written.
 
+        Use one <p>...</p> for each paragraph.
+
+        For a scene break, insert:
+        <div class="scene-divider" aria-hidden="true">✦</div>
+
+        Do not paste the story inside a JavaScript template string.
+        That avoids accidental problems with apostrophes and quotation marks.
+        -->
+
+        <!-- PASTE YOUR EXISTING CHAPTER TWO STORY HERE -->
+
+    </article>
+
+    <section class="ending">
+        <p class="ending-label">The story continues</p>
         <h2>THE END...</h2>
+        <p class="credit">— By<br>Sabarish P</p>
 
-        <p>
-            RYAN IS DEAD. JAMES ANDERSON IS DEAD.<br>
-            AND DAVID HARRIS HAS ARRIVED.
-        </p>
-
-        <a class="back-link" href="index.html">
-            ← RETURN TO CHAPTER ONE
-        </a>
+        <a class="back-link" href="index.html">← Return to Chapter One</a>
     </section>
-
 </main>
 
 <footer>
-    THE HARBOUR <span>•</span> WRITTEN BY SABARISH P <span>•</span> CHAPTER TWO
+    THE HARBOUR <span>•</span> CHAPTER TWO <span>•</span> THE RETURN
 </footer>
 
 <script>
-const rawStory = `THE HARBOUR
-
-CHAPTER TWO
-
-THE RETURN
-
-The sea was silent.
-
-The small boat drifted endlessly across the dark water. Jack Wilson slowly opened his eyes. His body was exhausted after the brutal fight at the harbour. He looked around and realized that he and Daniel Carter were still alive, but they had no idea where they were.
-
-Daniel was lying at the other end of the boat. He slowly opened his eyes and looked at Jack.
-
-"Where are we?"
-
-Jack looked toward the horizon.
-
-"I don't know."
-
-Daniel looked around at the endless sea.
-
-"So... we're dead?"
-
-Jack gave him an irritated look.
-
-"No."
-
-Daniel looked at the sky.
-
-"Then maybe we're in heaven."
-
-Jack ignored him and carefully studied the direction of the waves. Suddenly, he recognized the area.
-
-"This is close to one of our shipping routes."
-
-Daniel sat up.
-
-"Our ships?"
-
-Jack nodded.
-
-"If we're lucky, one of them will pass this way."
-
-They waited.
-
-Hours passed.
-
-But no ship appeared.
-
-Jack slowly began to realize that something was wrong. Their entire transport network had been exposed. Ryan had stopped their operations, and the police were searching for their men and ships.
-
-Then, late at night, a light appeared on the horizon.
-
-A ship.
-
-Jack immediately recognized it.
-
-It was one of their international ships.
-
-The crew spotted the small boat and lowered a ladder. Jack and Daniel climbed aboard.
-
-The labourers stared at them in shock.
-
-"Sir... we thought you were dead."
-
-Jack ignored the comment.
-
-"What happened to the other ships?"
-
-One of the labourers explained that Ryan had exposed their operations and the police had stopped their transports. The remaining crew had been ordered to stay hidden at sea.
-
-Jack looked at Daniel.
-
-Then he gave one order.
-
-"Take this ship to Los Angeles."
-
-The ship changed direction.
-
-They were going back.
-
-But they didn't know that another enemy was already waiting for them.
-
-
----
-
-After reaching Los Angeles, Jack and Daniel left the ship and entered the city.
-
-They drove through the streets in silence.
-
-Their business was collapsing.
-
-Their routes had been exposed.
-
-Their men were hiding.
-
-Everything they had built was beginning to disappear.
-
-Suddenly, Daniel noticed several motorcycles following their car.
-
-"Jack..."
-
-Jack looked behind them.
-
-A biker raised a gun.
-
-BANG!
-
-A bullet struck the car.
-
-Daniel immediately accelerated.
-
-The bikers chased them through the streets.
-
-More gunshots followed.
-
-Jack climbed onto the roof of the car and pulled out his gun.
-
-One biker came close.
-
-Jack fired.
-
-The biker lost control and crashed.
-
-Another biker approached.
-
-Jack fired again.
-
-Then one biker managed to reach the car.
-
-Jack grabbed him and pulled him inside.
-
-He pointed a gun at him.
-
-"Who sent you?"
-
-The biker refused to answer.
-
-Jack tightened his grip.
-
-"Who?"
-
-Finally, the biker spoke.
-
-"James Anderson."
-
-Jack and Daniel looked at each other.
-
-James Anderson.
-
-Michael Brooks's younger brother.
-
-The same Michael Brooks who had been killed at the harbour.
-
-James believed Jack and Daniel were responsible.
-
-And now he wanted revenge.
-
-
----
-
-Jack and Daniel went directly to James Anderson's mansion.
-
-Security guards surrounded them.
-
-James eventually appeared at the top of the stairs.
-
-"You killed my brother."
-
-Jack shook his head.
-
-"We didn't."
-
-James refused to believe them.
-
-Jack then showed him the transport documents proving that Ryan had exposed their operations and caused their entire network to collapse.
-
-James studied the documents.
-
-After a long silence, he finally said:
-
-"Take them to Tuticorin."
-
-James ordered his guards to accompany Jack and Daniel.
-
-"If Ryan killed my brother, we'll finish him."
-
-The vehicles began their journey toward India.
-
-But James had already made another plan.
-
-
----
-
-Before reaching the harbour, the vehicles suddenly turned into a forest.
-
-Jack immediately became suspicious.
-
-"This isn't the way to the harbour."
-
-Nobody answered.
-
-The vehicles stopped.
-
-The guards dragged Jack and Daniel out and tied them to trees.
-
-A phone rang.
-
-One of the guards answered.
-
-James Anderson was on the other side.
-
-Jack shouted:
-
-"James!"
-
-James laughed.
-
-"I never believed you."
-
-Jack stared at him.
-
-"You know we didn't kill Michael."
-
-"I know."
-
-Jack's expression changed.
-
-James continued.
-
-"I don't need either of you anymore. Once you're dead, I'll take over the entire business."
-
-Daniel shouted angrily.
-
-"You bastard!"
-
-James ended the call.
-
-The guards approached with knives.
-
-Daniel struggled against the ropes.
-
-Jack looked at his wristwatch.
-
-He smashed it against the tree.
-
-The glass cracked.
-
-He smashed it again.
-
-A sharp piece of glass broke away.
-
-Jack secretly used it to cut through the rope.
-
-A guard approached him with a knife.
-
-At the last moment, Jack broke free.
-
-He attacked the guard.
-
-Daniel freed himself and joined the fight.
-
-The forest erupted into chaos.
-
-Gunshots echoed through the trees.
-
-Fire spread across the ground.
-
-The guards attacked from every direction.
-
-Jack and Daniel fought back with brutal determination.
-
-One by one, the guards fell.
-
-When the fight ended, Jack and Daniel stood among the bodies.
-
-Jack took out his phone.
-
-He called Ryan.
-
-Ryan answered.
-
-Jack spoke calmly.
-
-"We will be back to kill you."
-
-The call ended.
-
-Ryan stood frozen.
-
-He knew the nightmare had returned.
-
-
----
-
-The next day, Ryan went to the harbour.
-
-He knew Jack and Daniel would come looking for him.
-
-They were already there.
-
-Ryan saw them.
-
-For a moment, nobody moved.
-
-Then Daniel attacked.
-
-The harbour once again became a battlefield.
-
-Ryan fought back with everything he had.
-
-But Jack and Daniel eventually overpowered him.
-
-Daniel grabbed Ryan.
-
-"You destroyed everything."
-
-Ryan shouted back:
-
-"You were destroying my home!"
-
-Daniel attacked him.
-
-Jack stepped forward.
-
-"We're taking you to Los Angeles."
-
-Ryan had no choice.
-
-They took him with them.
-
-
----
-
-In Los Angeles, they brought Ryan directly to James Anderson.
-
-James looked at the three men standing before him.
-
-Jack.
-
-Daniel.
-
-Ryan.
-
-A strange smile appeared on James's face.
-
-"So this is Ryan."
-
-Ryan stared at him.
-
-James walked closer.
-
-"You caused me a lot of trouble."
-
-Then James suddenly raised his gun.
-
-Jack realized what was happening.
-
-"James..."
-
-James smiled.
-
-"I'm going to solve everything."
-
-He pointed the weapon at all three of them.
-
-"I don't need any of you."
-
-A fight immediately broke out.
-
-Jack attacked.
-
-Daniel followed.
-
-Ryan joined them.
-
-The room descended into chaos.
-
-Furniture shattered.
-
-Glass broke.
-
-Gunshots echoed through the building.
-
-James fought desperately.
-
-But Ryan finally reached him.
-
-The two struggled.
-
-Ryan found an opening.
-
-He attacked James.
-
-James fell to the ground.
-
-James Anderson was dead.
-
-Silence returned to the room.
-
-Ryan looked at Jack and Daniel.
-
-"I don't want your business."
-
-He paused.
-
-"Let me live. I won't involve myself in your problems anymore."
-
-Daniel stared at him.
-
-"You deserved to die."
-
-Ryan looked at Daniel.
-
-Before anyone could say another word—
-
-BANG!
-
-A single gunshot echoed through the room.
-
-Ryan's body suddenly dropped to the floor.
-
-Silence.
-
-Jack froze.
-
-Daniel froze.
-
-Neither of them had fired.
-
-Slowly, they turned around to see who had pulled the trigger.
-
-And then—
-
-They were shocked.
-
-A man was standing behind them.
-
-He was wearing a dark mask.
-
-But the face on the mask...
-
-It looked exactly like Daniel.
-
-Jack stared at him.
-
-Daniel stared at himself.
-
-For a moment, neither of them could understand what they were seeing.
-
-"Who... is that?" Daniel whispered.
-
-The mysterious man didn't answer.
-
-He simply stood there.
-
-Then, slowly...
-
-He raised his hand toward his face.
-
-His fingers touched the edge of the mask.
-
-Jack's eyes widened.
-
-Daniel took a step backward.
-
-The man slowly began removing the mask.
-
-Piece by piece...
-
-Until the mask finally came off.
-
-It fell silently to the floor.
-
-Jack and Daniel stared at the man's face.
-
-Their expressions changed instantly.
-
-They knew him.
-
-They had never expected to see him here.
-
-Jack and Daniel looked at each other.
-
-Then back at the man.
-
-And together, in complete shock, they said—
-
-"David Harris?"
-
-David Harris slowly smiled.
-
-The room fell silent.
-
-Ryan was dead.
-
-James Anderson was dead.
-
-And now...
-
-David Harris had arrived.
-
-THE END...
-
-— By
-Sabarish P`;
-
-const story = document.getElementById("story");
-
-const paragraphs = rawStory.split(/\n\s*\n/);
-
-paragraphs.forEach((text) => {
-    const trimmed = text.trim();
-
-    if (!trimmed) return;
-
-    if (/^---+$/.test(trimmed)) {
-        const divider = document.createElement("div");
-        divider.className = "scene-break";
-        story.appendChild(divider);
-        return;
-    }
-
-    const p = document.createElement("p");
-    p.textContent = trimmed;
-
-    if (
-        trimmed === "BANG!" ||
-        trimmed === "THE END..." ||
-        trimmed === '"David Harris?"' ||
-        trimmed === "David Harris slowly smiled."
-    ) {
-        p.className = "impact";
-    }
-
-    if (
-        trimmed === "David Harris?" ||
-        trimmed === "Ryan was dead." ||
-        trimmed === "James Anderson was dead."
-    ) {
-        p.className = "reveal";
-    }
-
-    if (trimmed === "THE END...") {
-        p.className = "final-line";
-    }
-
-    story.appendChild(p);
-});
+// Reading progress bar
+const progressBar = document.getElementById('readingProgress');
+
+function updateReadingProgress() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    progressBar.style.width = `${Math.min(100, progress)}%`;
+}
+
+window.addEventListener('scroll', updateReadingProgress, { passive: true });
+window.addEventListener('resize', updateReadingProgress);
+updateReadingProgress();
+
+// Subtle floating ember particles
+const emberContainer = document.getElementById('embers');
+
+for (let i = 0; i < 24; i++) {
+    const ember = document.createElement('span');
+    ember.className = 'ember';
+    ember.style.left = `${Math.random() * 100}%`;
+    ember.style.animationDuration = `${9 + Math.random() * 14}s`;
+    ember.style.animationDelay = `${Math.random() * 15}s`;
+    ember.style.opacity = `${0.2 + Math.random() * 0.5}`;
+    ember.style.transform = `scale(${0.5 + Math.random()})`;
+    emberContainer.appendChild(ember);
+}
+
+// Reveal paragraphs smoothly as the reader scrolls
+const paragraphs = document.querySelectorAll('.story p');
+
+if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    paragraphs.forEach(paragraph => observer.observe(paragraph));
+} else {
+    paragraphs.forEach(paragraph => paragraph.classList.add('visible'));
+}
 </script>
-
 </body>
 </html>
