@@ -3,43 +3,571 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta
-        name="description"
-        content="THE HARBOUR — Chapter Two: The Return. A cinematic crime thriller by Sabarish P."
-    >
-
     <meta name="theme-color" content="#080507">
+
+    <meta name="description"
+          content="THE HARBOUR — Chapter Two: The Return. A cinematic crime thriller by Sabarish P.">
 
     <title>THE HARBOUR | Chapter Two — The Return</title>
 
-    <!-- Your existing CSS -->
+    <!-- Existing project stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Cinematic typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /* Chapter Two-specific cinematic enhancements */
+
+        .cinematic-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 50% 5%,
+                    rgba(130, 0, 28, .17), transparent 55%),
+                radial-gradient(ellipse at 5% 70%,
+                    rgba(255, 0, 38, .045), transparent 40%);
+        }
+
+        .cinematic-backdrop::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(255, 0, 38, .035) 30deg,
+                transparent 70deg,
+                transparent 180deg,
+                rgba(255, 0, 38, .045) 220deg,
+                transparent 260deg
+            );
+            animation: harbourAtmosphere 38s linear infinite;
+        }
+
+        @keyframes harbourAtmosphere {
+            to { transform: rotate(360deg); }
+        }
+
+        .hero {
+            min-height: 430px;
+        }
+
+        .hero-art {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            opacity: .8;
+            pointer-events: none;
+        }
+
+        .hero .eyebrow {
+            position: relative;
+            z-index: 2;
+            color: #ff9eae;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 2;
+            color: #ff183b;
+            font-family: "Cinzel", serif;
+            font-weight: 900;
+            letter-spacing: clamp(2px, 1vw, 8px);
+            text-shadow:
+                0 0 2px #fff,
+                0 0 10px rgba(255, 21, 56, .95),
+                0 0 28px rgba(255, 21, 56, .75),
+                0 0 65px rgba(255, 0, 38, .45);
+        }
+
+        .hero .title-rule {
+            position: relative;
+            z-index: 2;
+            width: min(300px, 75%);
+            height: 2px;
+            margin: 22px auto;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #a50021,
+                #fff0f2,
+                #ff1538,
+                transparent
+            );
+            box-shadow: 0 0 16px rgba(255, 21, 56, .8);
+        }
+
+        .hero .chapter-label,
+        .hero .tagline {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .chapter-label {
+            color: #fff0f2;
+            letter-spacing: 5px;
+        }
+
+        .hero .tagline {
+            color: #ff7a91;
+            letter-spacing: 5px;
+            font-family: "Cinzel", serif;
+            font-weight: 700;
+        }
+
+        /* SVG harbour artwork */
+        .harbour-horizon {
+            stroke: rgba(255, 43, 69, .55);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .harbour-silhouette {
+            fill: #080507;
+            stroke: rgba(255, 28, 57, .3);
+            stroke-width: 1;
+        }
+
+        .harbour-light {
+            fill: #ff183b;
+            filter: drop-shadow(0 0 7px #ff183b);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -80%;
+            width: 60%;
+            z-index: 1;
+            pointer-events: none;
+            transform: skewX(-22deg);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 20, 55, .045),
+                rgba(255, 20, 55, .14),
+                transparent
+            );
+            animation: cinematicSweep 9s ease-in-out infinite;
+        }
+
+        @keyframes cinematicSweep {
+            0%, 18% { left: -80%; }
+            70%, 100% { left: 150%; }
+        }
+
+        /* Chapter metadata */
+        .chapter-kicker {
+            margin: 0 0 12px;
+            color: #b6a3a9;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Story panel */
+        .story-content {
+            position: relative;
+            overflow: hidden;
+            border-color: rgba(255, 30, 59, .18);
+            background:
+                linear-gradient(145deg,
+                    rgba(20, 10, 14, .97),
+                    rgba(7, 5, 7, .98));
+        }
+
+        .story-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                transparent,
+                rgba(255, 21, 56, .65),
+                transparent
+            );
+            pointer-events: none;
+        }
+
+        .story-content p {
+            color: #e6dce0;
+        }
+
+        /* Important story moments only */
+        .story-content p.impact {
+            padding: 12px 16px;
+            border-left: 2px solid #ff183b;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 21, 56, .12),
+                transparent 90%
+            );
+            color: #fff;
+            text-shadow: 0 0 14px rgba(255, 21, 56, .2);
+        }
+
+        /* Character entrances */
+        .story-content p.character-entry {
+            padding: 14px 16px;
+            border-left: 2px solid #ff3656;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 21, 56, .14),
+                rgba(255, 21, 56, .015) 75%,
+                transparent
+            );
+            color: #fff1f3;
+            box-shadow: inset 12px 0 30px rgba(255, 21, 56, .025);
+        }
+
+        /* Major reveal */
+        .story-content p.david-reveal {
+            margin: 36px 0;
+            padding: 25px 12px;
+            border-top: 1px solid rgba(255, 21, 56, .7);
+            border-bottom: 1px solid rgba(255, 21, 56, .7);
+            background: radial-gradient(
+                ellipse at center,
+                rgba(170, 0, 35, .23),
+                transparent 75%
+            );
+            color: #ff284b;
+            text-align: center;
+            font-family: "Cinzel", serif;
+            font-size: clamp(21px, 4vw, 32px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow:
+                0 0 8px rgba(255, 21, 56, .85),
+                0 0 30px rgba(255, 21, 56, .4);
+            animation: revealGlow 2.8s ease-in-out infinite;
+        }
+
+        @keyframes revealGlow {
+            0%, 100% { text-shadow: 0 0 7px rgba(255, 21, 56, .7); }
+            50% {
+                text-shadow:
+                    0 0 12px #ff1538,
+                    0 0 34px rgba(255, 21, 56, .8);
+            }
+        }
+
+        /* Scene divider */
+        .scene-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 42px 0;
+            color: #ff3656;
+            font-size: 13px;
+            letter-spacing: 7px;
+        }
+
+        .scene-divider::before,
+        .scene-divider::after {
+            content: "";
+            width: min(90px, 20%);
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 21, 56, .85)
+            );
+        }
+
+        .scene-divider::after {
+            transform: rotate(180deg);
+        }
+
+        /* Author signature */
+        .author-watermark {
+            position: relative;
+            isolation: isolate;
+            margin: 36px auto 0;
+            padding: 24px 12px 8px;
+            width: min(390px, 100%);
+            border-top: 1px solid rgba(216, 183, 122, .55);
+            text-align: center;
+        }
+
+        .author-watermark::before {
+            content: "S";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transform: translate(-50%, -40%);
+            color: rgba(216, 183, 122, .055);
+            font-family: "Cinzel", serif;
+            font-size: 145px;
+            font-weight: 900;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .author-label {
+            color: #a99b9e;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .author-name {
+            margin-top: 7px;
+            color: #dfbd82;
+            font-family: "Cinzel", serif;
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(216, 183, 122, .23);
+        }
+
+        .author-caption {
+            margin-top: 7px;
+            color: #84757a;
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+
+        /* Ending card */
+        .end-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 21, 56, .4);
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    rgba(130, 0, 28, .23),
+                    transparent 75%
+                ),
+                #0b0709;
+        }
+
+        .end-card .end-title {
+            color: #ff183b;
+            font-family: "Cinzel", serif;
+            font-size: clamp(27px, 5vw, 45px);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-shadow:
+                0 0 10px rgba(255, 21, 56, .8),
+                0 0 32px rgba(255, 21, 56, .35);
+        }
+
+        /* Next chapter */
+        .chapter-three {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 21, 56, .32);
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(255, 21, 56, .09),
+                    transparent 70%
+                ),
+                #0c080a;
+        }
+
+        .chapter-three h2 {
+            color: #ff3656;
+            font-family: "Cinzel", serif;
+            text-shadow: 0 0 20px rgba(255, 21, 56, .35);
+        }
+
+        .coming-soon-label {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255, 21, 56, .45);
+            color: #ff8395;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 330px;
+                padding: 48px 16px;
+            }
+
+            .hero .chapter-label {
+                letter-spacing: 3px;
+            }
+
+            .hero .tagline {
+                letter-spacing: 3px;
+            }
+
+            .story-content {
+                padding: 22px 17px;
+            }
+
+            .story-content p {
+                font-size: 14px;
+                line-height: 1.95;
+            }
+
+            .author-watermark::before {
+                font-size: 110px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Reading progress indicator -->
+    <!-- Cinematic background -->
+    <div class="cinematic-backdrop" aria-hidden="true"></div>
+
+    <!-- Reading progress -->
     <div id="readingProgress"></div>
 
     <main class="container">
 
-        <!-- Navigation: returns to your existing index.html -->
+        <!-- Return navigation -->
         <a class="back-link" href="index.html">
             &#8592; Return to Chapter One
         </a>
 
-        <!-- CINEMATIC HERO -->
+        <!-- ================= HERO ================= -->
+
         <header class="hero">
+
+            <!-- Original inline harbour artwork -->
+            <svg class="hero-art"
+                 viewBox="0 0 1200 520"
+                 preserveAspectRatio="xMidYMid slice"
+                 role="img"
+                 aria-label="A dark harbour beneath a blood-red night sky">
+
+                <defs>
+                    <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#39000e"/>
+                        <stop offset="60%" stop-color="#14050b"/>
+                        <stop offset="100%" stop-color="#050407"/>
+                    </linearGradient>
+
+                    <radialGradient id="redMoon">
+                        <stop offset="0%" stop-color="#ff183b" stop-opacity=".55"/>
+                        <stop offset="55%" stop-color="#9a001f" stop-opacity=".23"/>
+                        <stop offset="100%" stop-color="#39000e" stop-opacity="0"/>
+                    </radialGradient>
+
+                    <linearGradient id="seaGlow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#460013" stop-opacity=".5"/>
+                        <stop offset="100%" stop-color="#050407" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Night sky -->
+                <rect width="1200" height="520" fill="url(#nightSky)"/>
+
+                <!-- Red atmospheric glow -->
+                <circle cx="600" cy="180" r="300" fill="url(#redMoon)"/>
+
+                <!-- Distant moon -->
+                <circle cx="870" cy="130" r="48"
+                        fill="#a80025" opacity=".15"/>
+
+                <circle cx="870" cy="130" r="32"
+                        fill="#ff2448" opacity=".1"/>
+
+                <!-- Harbour cranes -->
+                <g class="harbour-silhouette">
+                    <path d="M90 345 V185 H105 V345 Z"/>
+                    <path d="M96 190 H245 V201 H96 Z"/>
+                    <path d="M225 200 V345 H237 V200 Z"/>
+                    <path d="M105 195 L225 345 H214 L96 205 Z"/>
+
+                    <path d="M310 345 V150 H324 V345 Z"/>
+                    <path d="M317 155 H440 V166 H317 Z"/>
+                    <path d="M425 165 V345 H437 V165 Z"/>
+                    <path d="M325 160 L425 300 V318 L316 166 Z"/>
+
+                    <path d="M970 345 V205 H983 V345 Z"/>
+                    <path d="M976 210 H1110 V220 H976 Z"/>
+                    <path d="M1095 219 V345 H1107 V219 Z"/>
+                    <path d="M984 214 L1095 335 V345 H1084 L976 220 Z"/>
+                </g>
+
+                <!-- Ship silhouette -->
+                <path class="harbour-silhouette"
+                      d="M390 335 L850 335 L790 385 L470 385 Z"/>
+
+                <path class="harbour-silhouette"
+                      d="M485 335 V260 H525 V335 Z
+                         M530 335 V235 H570 V335 Z
+                         M575 335 V270 H615 V335 Z
+                         M620 335 V245 H660 V335 Z
+                         M665 335 V280 H705 V335 Z
+                         M710 335 V255 H750 V335 Z"/>
+
+                <!-- Ship windows -->
+                <g class="harbour-light">
+                    <rect x="496" y="275" width="6" height="5"/>
+                    <rect x="541" y="250" width="6" height="5"/>
+                    <rect x="586" y="285" width="6" height="5"/>
+                    <rect x="631" y="260" width="6" height="5"/>
+                    <rect x="676" y="295" width="6" height="5"/>
+                    <rect x="721" y="270" width="6" height="5"/>
+                </g>
+
+                <!-- Sea -->
+                <rect x="0" y="385" width="1200" height="135"
+                      fill="url(#seaGlow)"/>
+
+                <g class="harbour-horizon" opacity=".8">
+                    <path d="M0 405 H1200"/>
+                    <path d="M100 425 H390"/>
+                    <path d="M570 435 H890"/>
+                    <path d="M850 455 H1160"/>
+                    <path d="M170 470 H500"/>
+                    <path d="M610 490 H950"/>
+                    <path d="M40 505 H240"/>
+                </g>
+
+                <!-- Blood-red reflected harbour light -->
+                <g stroke="#ff183b" stroke-width="2" opacity=".2">
+                    <path d="M585 390 L540 520"/>
+                    <path d="M620 390 L660 520"/>
+                    <path d="M600 390 L600 520"/>
+                </g>
+
+                <!-- Atmospheric dark overlay -->
+                <rect width="1200" height="520"
+                      fill="#050407" opacity=".27"/>
+
+            </svg>
 
             <p class="eyebrow">
                 A CINEMATIC CRIME THRILLER
@@ -57,89 +585,577 @@
                 THE RETURN
             </p>
 
-            <!-- Animated harbour radar -->
-            <div class="radar" aria-hidden="true">
-                <span></span>
-            </div>
-
         </header>
 
-        <!-- STORY CONTENT -->
+        <!-- ================= ORIGINAL STORY ================= -->
+
         <article class="story-content" id="story">
 
-            <!--
-            IMPORTANT:
-            Paste your COMPLETE original Chapter Two story here.
-            Preserve every sentence, paragraph, dialogue line,
-            scene divider, and the original order.
+            <p class="impact">The sea was silent.</p>
 
-            You can retain existing classes such as:
-            highlight
-            scene-divider
-            david-reveal
+            <p>The small boat drifted endlessly across the dark water. Jack Wilson slowly opened his eyes. His body was exhausted after the brutal fight at the harbour. He looked around and realized that he and Daniel Carter were still alive, but they had no idea where they were.</p>
 
-            Do not paste the instructions inside this comment
-            as visible story content.
-            -->
+            <p>Daniel was lying at the other end of the boat. He slowly opened his eyes and looked at Jack.</p>
 
-            <!-- YOUR ORIGINAL CHAPTER TWO STORY GOES HERE -->
+            <p>"Where are we?"</p>
+
+            <p>Jack looked toward the horizon.</p>
+
+            <p>"I don't know."</p>
+
+            <p>Daniel looked around at the endless sea.</p>
+
+            <p>"So... we're dead?"</p>
+
+            <p>Jack gave him an irritated look.</p>
+
+            <p>"No."</p>
+
+            <p>Daniel looked at the sky.</p>
+
+            <p>"Then maybe we're in heaven."</p>
+
+            <p>Jack ignored him and carefully studied the direction of the waves. Suddenly, he recognized the area.</p>
+
+            <p>"This is close to one of our shipping routes."</p>
+
+            <p>Daniel sat up.</p>
+
+            <p>"Our ships?"</p>
+
+            <p>Jack nodded.</p>
+
+            <p>"If we're lucky, one of them will pass this way."</p>
+
+            <p>They waited.</p>
+
+            <p>Hours passed.</p>
+
+            <p>But no ship appeared.</p>
+
+            <p>Jack slowly began to realize that something was wrong. Their entire transport network had been exposed. Ryan had stopped their operations, and the police were searching for their men and ships.</p>
+
+            <p>Then, late at night, a light appeared on the horizon.</p>
+
+            <p class="impact">A ship.</p>
+
+            <p>Jack immediately recognized it.</p>
+
+            <p>It was one of their international ships.</p>
+
+            <p>The crew spotted the small boat and lowered a ladder. Jack and Daniel climbed aboard.</p>
+
+            <p>The labourers stared at them in shock.</p>
+
+            <p>"Sir... we thought you were dead."</p>
+
+            <p>Jack ignored the comment.</p>
+
+            <p>"What happened to the other ships?"</p>
+
+            <p>One of the labourers explained that Ryan had exposed their operations and the police had stopped their transports. The remaining crew had been ordered to stay hidden at sea.</p>
+
+            <p>Jack looked at Daniel.</p>
+
+            <p>Then he gave one order.</p>
+
+            <p class="impact">"Take this ship to Los Angeles."</p>
+
+            <p>The ship changed direction.</p>
+
+            <p>They were going back.</p>
+
+            <p>But they didn't know that another enemy was already waiting for them.</p>
+
+
+            <div class="scene-divider" aria-hidden="true">✦</div>
+
+
+            <p>After reaching Los Angeles, Jack and Daniel left the ship and entered the city.</p>
+
+            <p>They drove through the streets in silence.</p>
+
+            <p>Their business was collapsing.</p>
+
+            <p>Their routes had been exposed.</p>
+
+            <p>Their men were hiding.</p>
+
+            <p>Everything they had built was beginning to disappear.</p>
+
+            <p>Suddenly, Daniel noticed several motorcycles following their car.</p>
+
+            <p>"Jack..."</p>
+
+            <p>Jack looked behind them.</p>
+
+            <p>A biker raised a gun.</p>
+
+            <p class="impact">BANG!</p>
+
+            <p>A bullet struck the car.</p>
+
+            <p>Daniel immediately accelerated.</p>
+
+            <p>The bikers chased them through the streets.</p>
+
+            <p>More gunshots followed.</p>
+
+            <p>Jack climbed onto the roof of the car and pulled out his gun.</p>
+
+            <p>One biker came close.</p>
+
+            <p>Jack fired.</p>
+
+            <p>The biker lost control and crashed.</p>
+
+            <p>Another biker approached.</p>
+
+            <p>Jack fired again.</p>
+
+            <p>Then one biker managed to reach the car.</p>
+
+            <p>Jack grabbed him and pulled him inside.</p>
+
+            <p>He pointed a gun at him.</p>
+
+            <p>"Who sent you?"</p>
+
+            <p>The biker refused to answer.</p>
+
+            <p>Jack tightened his grip.</p>
+
+            <p>"Who?"</p>
+
+            <p>Finally, the biker spoke.</p>
+
+            <p class="character-entry">"James Anderson."</p>
+
+            <p>Jack and Daniel looked at each other.</p>
+
+            <p class="impact">James Anderson.</p>
+
+            <p>Michael Brooks's younger brother.</p>
+
+            <p>The same Michael Brooks who had been killed at the harbour.</p>
+
+            <p>James believed Jack and Daniel were responsible.</p>
+
+            <p>And now he wanted revenge.</p>
+
+
+            <div class="scene-divider" aria-hidden="true">✦</div>
+
+
+            <p>Jack and Daniel went directly to James Anderson's mansion.</p>
+
+            <p>Security guards surrounded them.</p>
+
+            <p>James eventually appeared at the top of the stairs.</p>
+
+            <p>"You killed my brother."</p>
+
+            <p>Jack shook his head.</p>
+
+            <p>"We didn't."</p>
+
+            <p>James refused to believe them.</p>
+
+            <p>Jack then showed him the transport documents proving that Ryan had exposed their operations and caused their entire network to collapse.</p>
+
+            <p>James studied the documents.</p>
+
+            <p>After a long silence, he finally said:</p>
+
+            <p class="impact">"Take them to Tuticorin."</p>
+
+            <p>James ordered his guards to accompany Jack and Daniel.</p>
+
+            <p>"If Ryan killed my brother, we'll finish him."</p>
+
+            <p>The vehicles began their journey toward India.</p>
+
+            <p>But James had already made another plan.</p>
+
+
+            <div class="scene-divider" aria-hidden="true">✦</div>
+
+
+            <p>Before reaching the harbour, the vehicles suddenly turned into a forest.</p>
+
+            <p>Jack immediately became suspicious.</p>
+
+            <p>"This isn't the way to the harbour."</p>
+
+            <p>Nobody answered.</p>
+
+            <p>The vehicles stopped.</p>
+
+            <p>The guards dragged Jack and Daniel out and tied them to trees.</p>
+
+            <p>A phone rang.</p>
+
+            <p>One of the guards answered.</p>
+
+            <p>James Anderson was on the other side.</p>
+
+            <p>Jack shouted:</p>
+
+            <p>"James!"</p>
+
+            <p>James laughed.</p>
+
+            <p class="impact">"I never believed you."</p>
+
+            <p>Jack stared at him.</p>
+
+            <p>"You know we didn't kill Michael."</p>
+
+            <p>"I know."</p>
+
+            <p>Jack's expression changed.</p>
+
+            <p>James continued.</p>
+
+            <p>"I don't need either of you anymore. Once you're dead, I'll take over the entire business."</p>
+
+            <p>Daniel shouted angrily.</p>
+
+            <p>"You bastard!"</p>
+
+            <p>James ended the call.</p>
+
+            <p>The guards approached with knives.</p>
+
+            <p>Daniel struggled against the ropes.</p>
+
+            <p>Jack looked at his wristwatch.</p>
+
+            <p>He smashed it against the tree.</p>
+
+            <p>The glass cracked.</p>
+
+            <p>He smashed it again.</p>
+
+            <p>A sharp piece of glass broke away.</p>
+
+            <p>Jack secretly used it to cut through the rope.</p>
+
+            <p>A guard approached him with a knife.</p>
+
+            <p>At the last moment, Jack broke free.</p>
+
+            <p>He attacked the guard.</p>
+
+            <p>Daniel freed himself and joined the fight.</p>
+
+            <p class="impact">The forest erupted into chaos.</p>
+
+            <p>Gunshots echoed through the trees.</p>
+
+            <p>Fire spread across the ground.</p>
+
+            <p>The guards attacked from every direction.</p>
+
+            <p>Jack and Daniel fought back with brutal determination.</p>
+
+            <p>One by one, the guards fell.</p>
+
+            <p>When the fight ended, Jack and Daniel stood among the bodies.</p>
+
+            <p>Jack took out his phone.</p>
+
+            <p>He called Ryan.</p>
+
+            <p>Ryan answered.</p>
+
+            <p>Jack spoke calmly.</p>
+
+            <p class="impact">"We will be back to kill you."</p>
+
+            <p>The call ended.</p>
+
+            <p>Ryan stood frozen.</p>
+
+            <p>He knew the nightmare had returned.</p>
+
+
+            <div class="scene-divider" aria-hidden="true">✦</div>
+
+
+            <p>The next day, Ryan went to the harbour.</p>
+
+            <p>He knew Jack and Daniel would come looking for him.</p>
+
+            <p>They were already there.</p>
+
+            <p>Ryan saw them.</p>
+
+            <p>For a moment, nobody moved.</p>
+
+            <p>Then Daniel attacked.</p>
+
+            <p>The harbour once again became a battlefield.</p>
+
+            <p>Ryan fought back with everything he had.</p>
+
+            <p>But Jack and Daniel eventually overpowered him.</p>
+
+            <p>Daniel grabbed Ryan.</p>
+
+            <p>"You destroyed everything."</p>
+
+            <p>Ryan shouted back:</p>
+
+            <p>"You were destroying my home!"</p>
+
+            <p>Daniel attacked him.</p>
+
+            <p>Jack stepped forward.</p>
+
+            <p>"We're taking you to Los Angeles."</p>
+
+            <p>Ryan had no choice.</p>
+
+            <p>They took him with them.</p>
+
+
+            <div class="scene-divider" aria-hidden="true">✦</div>
+
+
+            <p>In Los Angeles, they brought Ryan directly to James Anderson.</p>
+
+            <p>James looked at the three men standing before him.</p>
+
+            <p>Jack.</p>
+
+            <p>Daniel.</p>
+
+            <p>Ryan.</p>
+
+            <p>A strange smile appeared on James's face.</p>
+
+            <p>"So this is Ryan."</p>
+
+            <p>Ryan stared at him.</p>
+
+            <p>James walked closer.</p>
+
+            <p>"You caused me a lot of trouble."</p>
+
+            <p>Then James suddenly raised his gun.</p>
+
+            <p>Jack realized what was happening.</p>
+
+            <p>"James..."</p>
+
+            <p>James smiled.</p>
+
+            <p>"I'm going to solve everything."</p>
+
+            <p>He pointed the weapon at all three of them.</p>
+
+            <p>"I don't need any of you."</p>
+
+            <p>A fight immediately broke out.</p>
+
+            <p>Jack attacked.</p>
+
+            <p>Daniel followed.</p>
+
+            <p>Ryan joined them.</p>
+
+            <p>The room descended into chaos.</p>
+
+            <p>Furniture shattered.</p>
+
+            <p>Glass broke.</p>
+
+            <p>Gunshots echoed through the building.</p>
+
+            <p>James fought desperately.</p>
+
+            <p>But Ryan finally reached him.</p>
+
+            <p>The two struggled.</p>
+
+            <p>Ryan found an opening.</p>
+
+            <p>He attacked James.</p>
+
+            <p>James fell to the ground.</p>
+
+            <p class="impact">James Anderson was dead.</p>
+
+            <p>Silence returned to the room.</p>
+
+            <p>Ryan looked at Jack and Daniel.</p>
+
+            <p>"I don't want your business."</p>
+
+            <p>He paused.</p>
+
+            <p>"Let me live. I won't involve myself in your problems anymore."</p>
+
+            <p>Daniel stared at him.</p>
+
+            <p>"You deserved to die."</p>
+
+            <p>Ryan looked at Daniel.</p>
+
+            <p>Before anyone could say another word—</p>
+
+            <p class="impact">BANG!</p>
+
+            <p>A single gunshot echoed through the room.</p>
+
+            <p>Ryan's body suddenly dropped to the floor.</p>
+
+            <p class="impact">Silence.</p>
+
+            <p>Jack froze.</p>
+
+            <p>Daniel froze.</p>
+
+            <p>Neither of them had fired.</p>
+
+            <p>Slowly, they turned around to see who had pulled the trigger.</p>
+
+            <p>And then—</p>
+
+            <p class="impact">They were shocked.</p>
+
+            <p>A man was standing behind them.</p>
+
+            <p>He was wearing a dark mask.</p>
+
+            <p>But the face on the mask...</p>
+
+            <p>It looked exactly like Daniel.</p>
+
+            <p>Jack stared at him.</p>
+
+            <p>Daniel stared at himself.</p>
+
+            <p>For a moment, neither of them could understand what they were seeing.</p>
+
+            <p>"Who... is that?" Daniel whispered.</p>
+
+            <p>The mysterious man didn't answer.</p>
+
+            <p>He simply stood there.</p>
+
+            <p>Then, slowly...</p>
+
+            <p>He raised his hand toward his face.</p>
+
+            <p>His fingers touched the edge of the mask.</p>
+
+            <p>Jack's eyes widened.</p>
+
+            <p>Daniel took a step backward.</p>
+
+            <p>The man slowly began removing the mask.</p>
+
+            <p>Piece by piece...</p>
+
+            <p>Until the mask finally came off.</p>
+
+            <p>It fell silently to the floor.</p>
+
+            <p>Jack and Daniel stared at the man's face.</p>
+
+            <p>Their expressions changed instantly.</p>
+
+            <p>They knew him.</p>
+
+            <p>They had never expected to see him here.</p>
+
+            <p>Jack and Daniel looked at each other.</p>
+
+            <p>Then back at the man.</p>
+
+            <p>And together, in complete shock, they said—</p>
+
+            <p class="david-reveal">"David Harris?"</p>
+
+            <p>David Harris slowly smiled.</p>
+
+            <p>The room fell silent.</p>
+
+            <p>Ryan was dead.</p>
+
+            <p>James Anderson was dead.</p>
+
+            <p>And now...</p>
+
+            <p class="impact">David Harris had arrived.</p>
+
+            <p class="impact">THE END...</p>
+
+            <p class="author-caption" style="text-align:center;">
+                &#8212; By
+            </p>
+
+            <p class="author-name" style="text-align:center;">
+                Sabarish P
+            </p>
 
         </article>
 
-        <!-- END OF CHAPTER -->
+        <!-- ================= PREMIUM END CARD ================= -->
+
         <section class="end-card">
 
-            <p class="eyebrow">
-                THE STORY CONTINUES
-            </p>
+            <p class="eyebrow">THE STORY CONTINUES</p>
 
-            <h2 class="end-title">
-                THE END...
-            </h2>
+            <h2 class="end-title">THE HARBOUR</h2>
 
             <p class="end-subtitle">
                 Every secret leaves a trace.
             </p>
 
-            <!-- Premium author watermark -->
             <div class="author-watermark">
 
                 <div class="author-label">
-                    WRITTEN BY
+                    A STORY CREATED BY
                 </div>
 
                 <div class="author-name">
                     SABARISH P
                 </div>
 
+                <div class="author-caption">
+                    WRITER &amp; CREATOR
+                </div>
+
             </div>
 
         </section>
 
-        <!-- NEXT CHAPTER -->
+        <!-- ================= NEXT CHAPTER ================= -->
+
         <section class="chapter-three">
 
-            <p class="eyebrow">
-                THE HARBOUR
-            </p>
+            <p class="eyebrow">THE NEXT CHAPTER</p>
 
             <h2>CHAPTER THREE</h2>
 
-            <p>THE FINAL GAME</p>
+            <p class="chapter-kicker">THE FINAL GAME</p>
 
-            <p>
+            <span class="coming-soon-label">
                 COMING SOON
-            </p>
+            </span>
 
         </section>
 
         <footer>
-            THE HARBOUR &bull; A STORY BY SABARISH P
+            THE HARBOUR &bull; CREATED BY SABARISH P
         </footer>
 
     </main>
 
-    <!-- Your existing JavaScript -->
+    <!-- Existing project JavaScript -->
     <script src="script.js" defer></script>
 
 </body>
