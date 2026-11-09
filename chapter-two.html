@@ -372,7 +372,7 @@
                 0 0 32px rgba(255, 21, 56, .35);
         }
 
-        /* Next chapter */
+        /* Chapter Three card */
         .chapter-three {
             position: relative;
             overflow: hidden;
@@ -392,11 +392,39 @@
             text-shadow: 0 0 20px rgba(255, 21, 56, .35);
         }
 
-        .coming-soon-label {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            border: 1px solid rgba(255, 21, 56, .45);
+        /* Chapter Three unlocked button */
+        .chapter-three-enter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 3;
+            margin-top: 22px;
+            padding: 13px 20px;
+            border: 1px solid rgba(255, 21, 56, .65);
+            background: rgba(100, 10, 20, .22);
+            color: #ff9eae;
+            text-decoration: none;
+            font-family: "Inter", sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all .3s ease;
+        }
+
+        .chapter-three-enter:hover {
+            color: #fff;
+            background: #74101d;
+            border-color: #ff3656;
+            box-shadow:
+                0 0 22px rgba(255, 21, 56, .35),
+                inset 0 0 15px rgba(255, 255, 255, .04);
+            transform: translateY(-3px);
+        }
+
+        .chapter-three .available-label {
+            display: block;
+            margin-top: 17px;
             color: #ff8395;
             font-size: 9px;
             font-weight: 700;
@@ -428,6 +456,11 @@
 
             .author-watermark::before {
                 font-size: 110px;
+            }
+
+            .chapter-three-enter {
+                font-size: 9px;
+                padding: 12px 15px;
             }
         }
 
@@ -667,9 +700,7 @@
 
             <p>But they didn't know that another enemy was already waiting for them.</p>
 
-
             <div class="scene-divider" aria-hidden="true">✦</div>
-
 
             <p>After reaching Los Angeles, Jack and Daniel left the ship and entered the city.</p>
 
@@ -743,9 +774,7 @@
 
             <p>And now he wanted revenge.</p>
 
-
             <div class="scene-divider" aria-hidden="true">✦</div>
-
 
             <p>Jack and Daniel went directly to James Anderson's mansion.</p>
 
@@ -777,9 +806,7 @@
 
             <p>But James had already made another plan.</p>
 
-
             <div class="scene-divider" aria-hidden="true">✦</div>
-
 
             <p>Before reaching the harbour, the vehicles suddenly turned into a forest.</p>
 
@@ -879,9 +906,7 @@
 
             <p>He knew the nightmare had returned.</p>
 
-
             <div class="scene-divider" aria-hidden="true">✦</div>
-
 
             <p>The next day, Ryan went to the harbour.</p>
 
@@ -919,9 +944,7 @@
 
             <p>They took him with them.</p>
 
-
             <div class="scene-divider" aria-hidden="true">✦</div>
-
 
             <p>In Los Angeles, they brought Ryan directly to James Anderson.</p>
 
@@ -1133,18 +1156,22 @@
 
         </section>
 
-        <!-- ================= NEXT CHAPTER ================= -->
+        <!-- ================= CHAPTER THREE: UNLOCKED ================= -->
 
         <section class="chapter-three">
 
-            <p class="eyebrow">THE NEXT CHAPTER</p>
+            <p class="eyebrow">THE FINAL CHAPTER</p>
 
             <h2>CHAPTER THREE</h2>
 
             <p class="chapter-kicker">THE FINAL GAME</p>
 
-            <span class="coming-soon-label">
-                COMING SOON
+            <a href="chapter-three.html" class="chapter-three-enter">
+                ENTER CHAPTER THREE &rarr;
+            </a>
+
+            <span class="available-label">
+                AVAILABLE NOW
             </span>
 
         </section>
