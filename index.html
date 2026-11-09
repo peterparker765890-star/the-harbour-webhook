@@ -524,7 +524,7 @@ body{
     opacity:.3;
 }
 
-/* CHAPTER TWO BUTTONS */
+/* CHAPTER TWO BUTTON */
 
 .chapter-two-link{
     display:inline-block;
@@ -561,6 +561,48 @@ body{
 
 @media(max-width:800px){
     .chapter-two-link{
+        font-size:9px;
+        padding:11px 12px;
+    }
+}
+
+/* CHAPTER THREE BUTTON */
+
+.chapter-three-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:3;
+    margin-top:28px;
+    padding:12px 15px;
+    color:#f0a0a8;
+    text-decoration:none;
+    font-family:Inter,Arial,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    border:1px solid rgba(180,25,40,.65);
+    background:rgba(100,10,20,.2);
+    transition:all .3s ease;
+}
+
+.chapter-three-link:hover{
+    color:#fff;
+    background:#74101d;
+    border-color:#e52b3c;
+    box-shadow:
+        0 0 22px rgba(229,43,60,.3),
+        inset 0 0 15px rgba(255,255,255,.04);
+    transform:translateY(-3px);
+}
+
+.chapter-card .chapter-three-link{
+    margin-top:35px;
+}
+
+@media(max-width:800px){
+    .chapter-three-link{
         font-size:9px;
         padding:11px 12px;
     }
@@ -939,6 +981,10 @@ footer{
         margin-top:30px;
     }
 
+    .chapter-card .chapter-three-link{
+        margin-top:30px;
+    }
+
     .contents{
         padding:85px 0;
     }
@@ -1098,7 +1144,7 @@ footer{
 
             </div>
 
-            <!-- CHAPTER TWO: NOW AVAILABLE -->
+            <!-- CHAPTER TWO: AVAILABLE -->
 
             <div class="chapter-card reveal">
 
@@ -1120,13 +1166,9 @@ footer{
 
             </div>
 
-            <!-- CHAPTER THREE -->
+            <!-- CHAPTER THREE: AVAILABLE -->
 
             <div class="chapter-card reveal">
-
-                <div class="lock-icon">
-                    🔒
-                </div>
 
                 <div class="card-number">
                     CHAPTER THREE
@@ -1136,8 +1178,12 @@ footer{
                     The Final Game
                 </h3>
 
-                <div class="card-status locked">
-                    COMING SOON
+                <a href="chapter-three.html" class="chapter-three-link">
+                    ENTER CHAPTER THREE →
+                </a>
+
+                <div class="card-status available">
+                    AVAILABLE NOW
                 </div>
 
             </div>
@@ -2395,7 +2441,7 @@ footer{
 
 </section>
 
-<!-- ENDING: CHAPTER TWO LINK ADDED -->
+<!-- ENDING: CHAPTER TWO LINK -->
 
 <section class="ending">
 
