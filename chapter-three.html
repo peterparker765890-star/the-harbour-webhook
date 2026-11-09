@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080607">
+<meta name="description" content="THE HARBOUR — Chapter Three: The Final Game. A crime thriller by Sabarish P.">
+<title>THE HARBOUR | Chapter Three — The Final Game</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #080607;
+    --panel: #100b0d;
+    --red: #a7192d;
+    --red-light: #e12b43;
+    --gold: #c8a66a;
+    --gold-light: #f0d39a;
+    --white: #f2eee9;
+    --muted: #a69a98;
+    --line: rgba(200,166,106,.23);
+
+    --display: "Cinzel", Georgia, serif;
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "Inter", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--sans);
+    line-height: 1.85;
+    overflow-x: hidden;
+}
+
+/* ATMOSPHERE */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: .10;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(255,255,255,.035) 4px
+    );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(115,16,31,.2), transparent 48%),
+        radial-gradient(ellipse at 0% 70%, rgba(104,16,28,.08), transparent 35%);
+}
+
+#readingProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    z-index: 100;
+    background: linear-gradient(90deg, var(--red), var(--gold-light));
+    box-shadow: 0 0 14px rgba(225,43,67,.7);
+}
+
+/* FLOATING EMBERS */
+
+.ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.ambient span {
+    position: absolute;
+    bottom: -10px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #e7b5a2;
+    opacity: 0;
+    animation: embers 12s linear infinite;
+}
+
+.ambient span:nth-child(1) { left: 8%; animation-delay: 0s; }
+.ambient span:nth-child(2) { left: 21%; animation-delay: 4s; }
+.ambient span:nth-child(3) { left: 38%; animation-delay: 8s; }
+.ambient span:nth-child(4) { left: 57%; animation-delay: 2s; }
+.ambient span:nth-child(5) { left: 74%; animation-delay: 6s; }
+.ambient span:nth-child(6) { left: 91%; animation-delay: 10s; }
+
+@keyframes embers {
+    0% {
+        transform: translateY(0) scale(.5);
+        opacity: 0;
+    }
+    15% { opacity: .65; }
+    100% {
+        transform: translateY(-105vh) translateX(35px) scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* NAVIGATION */
+
+.top-nav {
+    width: min(1100px, calc(100% - 40px));
+    margin: auto;
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand {
+    font: 600 .78rem var(--display);
+    letter-spacing: .24em;
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.back-link {
+    color: #d7c8c3;
+    text-decoration: none;
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 9px 14px;
+    transition: .25s;
+}
+
+.back-link:hover {
+    color: var(--gold-light);
+    border-color: var(--gold);
+}
+
+/* CINEMATIC HERO */
+
+.hero {
+    min-height: 78vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    padding: 90px 22px 115px;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: min(850px, 100vw);
+    height: min(850px, 100vw);
+    border: 1px solid rgba(200,166,106,.09);
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow:
+        0 0 0 55px rgba(200,166,106,.018),
+        0 0 0 110px rgba(200,166,106,.012);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(900px, 100%);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: .5;
+}
+
+.hero-inner {
+    max-width: 850px;
+    position: relative;
+}
+
+.eyebrow {
+    font-size: .68rem;
+    letter-spacing: .48em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font: 700 clamp(2.8rem, 9vw, 7rem)/1.05 var(--display);
+    letter-spacing: .06em;
+    text-shadow: 0 0 35px rgba(167,25,45,.24);
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--gold-light);
+    font-size: .48em;
+    letter-spacing: .34em;
+    margin-top: 27px;
+    font-weight: 500;
+}
+
+.chapter-label {
+    margin-top: 38px;
+    color: #e6d9d2;
+    letter-spacing: .42em;
+    font-size: .78rem;
+}
+
+.hero-rule {
+    width: 90px;
+    height: 1px;
+    background: var(--red-light);
+    margin: 35px auto 0;
+    box-shadow: 0 0 18px var(--red-light);
+}
+
+.hero-mark {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .6rem;
+    letter-spacing: .35em;
+    color: #76686a;
+    white-space: nowrap;
+}
+
+/* STORY */
+
+main {
+    width: min(790px, calc(100% - 42px));
+    margin: 0 auto;
+}
+
+.story-intro {
+    text-align: center;
+    margin: 0 auto 65px;
+    max-width: 650px;
+    color: #c5b8b4;
+    font: italic 1.2rem/1.8 var(--serif);
+}
+
+.story p {
+    font-size: 1rem;
+    line-height: 2.05;
+    color: #d5ccca;
+    margin-bottom: 19px;
+    font-weight: 350;
+}
+
+.story p.dialogue {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: #f0e6e1;
+    padding-left: 22px;
+    border-left: 2px solid rgba(167,25,45,.65);
+    margin: 24px 0;
+}
+
+.story p.impact {
+    font: 600 clamp(1.05rem, 3vw, 1.4rem)/1.7 var(--display);
+    color: var(--gold-light);
+    letter-spacing: .06em;
+    text-align: center;
+    margin: 34px 0;
+}
+
+.story p.red-impact {
+    color: #ed6877;
+}
+
+.story p.center {
+    text-align: center;
+}
+
+/* SCENE DIVIDERS */
+
+.scene {
+    margin: 56px 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--gold);
+    font: 600 .67rem var(--display);
+    letter-spacing: .28em;
+    text-transform: uppercase;
+}
+
+.scene::before,
+.scene::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, var(--line));
+}
+
+.scene::after {
+    background: linear-gradient(90deg, var(--line), transparent);
+}
+
+.flashback {
+    padding: 18px 20px;
+    margin: 60px 0 35px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    color: var(--red-light);
+    font: 600 .75rem var(--display);
+    letter-spacing: .35em;
+}
+
+.flashback small {
+    display: block;
+    color: var(--muted);
+    font: 400 .62rem var(--sans);
+    letter-spacing: .3em;
+    margin-top: 8px;
+}
+
+/* QUOTE */
+
+.quote-block {
+    margin: 55px 0;
+    padding: 30px 25px;
+    border-left: 2px solid var(--red-light);
+    background: linear-gradient(90deg, rgba(167,25,45,.12), transparent);
+    font: italic 1.3rem/1.8 var(--serif);
+    color: #f1dfd9;
+}
+
+/* REVEAL EFFECT */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* FINAL MORAL */
+
+.moral {
+    margin: 95px 0 50px;
+    padding: clamp(25px, 6vw, 55px);
+    border: 1px solid rgba(200,166,106,.4);
+    background: linear-gradient(145deg, rgba(37,14,19,.94), rgba(12,8,10,.97));
+    position: relative;
+    box-shadow: 0 25px 90px rgba(0,0,0,.4);
+}
+
+.moral::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(200,166,106,.12);
+    pointer-events: none;
+}
+
+.moral-kicker {
+    text-align: center;
+    color: var(--red-light);
+    font: 600 .68rem var(--display);
+    letter-spacing: .42em;
+    margin-bottom: 14px;
+}
+
+.moral h2 {
+    text-align: center;
+    font: 700 clamp(1.7rem, 5vw, 2.8rem) var(--display);
+    letter-spacing: .1em;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.moral .sub {
+    text-align: center;
+    color: #b9a8a4;
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.moral p {
+    position: relative;
+    font-size: .98rem;
+    line-height: 2.05;
+    color: #e0d4d0;
+    margin-bottom: 19px;
+}
+
+.moral .punch {
+    font: 700 clamp(1.1rem, 3vw, 1.55rem)/1.6 var(--display);
+    letter-spacing: .06em;
+    text-align: center;
+    color: #f1c7a5;
+    margin: 34px 0;
+}
+
+.moral .final-line {
+    font: 800 clamp(1.3rem, 4vw, 2rem)/1.5 var(--display);
+    letter-spacing: .08em;
+    text-align: center;
+    color: #f05a6b;
+    margin: 35px 0 8px;
+    text-shadow: 0 0 24px rgba(225,43,67,.25);
+}
+
+.moral .signature {
+    text-align: right;
+    color: var(--gold);
+    font: italic 1.05rem var(--serif);
+    margin: 40px 0 0;
+}
+
+.end-mark {
+    text-align: center;
+    margin: 80px 0 25px;
+    color: var(--gold);
+    font: 600 .72rem var(--display);
+    letter-spacing: .55em;
+}
+
+.end-mark::before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 1px;
+    background: var(--gold);
+    opacity: .5;
+    margin: 0 auto 24px;
+}
+
+/* FOOTER */
+
+.footer {
+    border-top: 1px solid var(--line);
+    margin-top: 90px;
+    padding: 35px 20px 45px;
+    text-align: center;
+    color: #77696a;
+    font-size: .68rem;
+    letter-spacing: .16em;
+}
+
+.footer strong {
+    display: block;
+    color: var(--gold);
+    font: 500 .8rem var(--display);
+    letter-spacing: .24em;
+    margin-bottom: 9px;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.footer-nav a {
+    color: #c7b6ae;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    padding: 9px 13px;
+    font-size: .66rem;
+    letter-spacing: .12em;
+}
+
+.footer-nav a:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+    .top-nav {
+        width: calc(100% - 28px);
+        padding: 18px 0;
+    }
+
+    .brand {
+        font-size: .65rem;
+    }
+
+    .back-link {
+        font-size: .62rem;
+        padding: 8px 10px;
+    }
+
+    .hero {
+        min-height: 68vh;
+        padding: 75px 18px 95px;
+    }
+
+    .eyebrow {
+        letter-spacing: .3em;
+        font-size: .6rem;
+    }
+
+    .chapter-label {
+        letter-spacing: .25em;
+    }
+
+    main {
+        width: calc(100% - 34px);
+    }
+
+    .story p {
+        font-size: .94rem;
+        line-height: 1.95;
+    }
+
+    .story p.dialogue {
+        font-size: 1.04rem;
+    }
+
+    .moral {
+        margin: 70px 0 35px;
+        padding: 27px 20px;
+    }
+
+    .moral .sub {
+        letter-spacing: .17em;
+        font-size: .63rem;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="readingProgress"></div>
+
+<div class="ambient" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav class="top-nav">
+    <a class="brand" href="index.html">THE HARBOUR</a>
+
+    <a class="back-link" href="chapter-two.html">
+        ← Return to Chapter Two
+    </a>
+</nav>
+
+<header class="hero">
+
+    <div class="hero-inner">
+
+        <p class="eyebrow">The story reaches its end</p>
+
+        <h1>
+            THE HARBOUR
+            <span>CHAPTER THREE</span>
+        </h1>
+
+        <div class="chapter-label">
+            THE FINAL GAME
+        </div>
+
+        <div class="hero-rule"></div>
+
+    </div>
+
+    <div class="hero-mark">
+        EVERY SECRET HAS A PRICE
+    </div>
+
+</header>
+
+<main>
+
+<p class="story-intro">
+    Some debts are paid in money. Some are paid in blood.
+    And some follow you until the very end.
+</p>
+
+<article class="story" id="story">
+
+<p class="reveal">Jack and Daniel stood completely still.</p>
+<p class="reveal">They could hardly believe what they were seeing.</p>
+<p class="reveal">The man standing before them was David Harris.</p>
+<p class="reveal">The same David Harris they had believed was gone from their lives.</p>
+<p class="reveal">The same man who had once worked under Michael Brooks.</p>
+<p class="reveal">The same man who had disappeared years ago.</p>
+<p class="reveal">Daniel stared at him with disbelief.</p>
+<p class="dialogue reveal">"David..."</p>
+<p class="reveal">David smiled.</p>
+<p class="reveal">But he said nothing.</p>
+<p class="reveal">Jack looked at Daniel, trying to understand what was happening.</p>
+<p class="reveal">Then, suddenly, Daniel remembered.</p>
+<p class="reveal">Everything began to come back.</p>
+
+<div class="flashback reveal">
+    FLASHBACK
+    <small>A FEW YEARS EARLIER...</small>
+</div>
+
+<p class="reveal">Before James Anderson became the leader of the mining business, his elder brother, Michael Brooks, controlled everything.</p>
+<p class="reveal">Michael was a powerful businessman who controlled mining operations, transportation networks, and several illegal dealings.</p>
+<p class="reveal">At that time, a young man named David Harris joined his organization as an ordinary labourer.</p>
+<p class="reveal">Nobody paid much attention to him.</p>
+<p class="reveal">He was just another worker.</p>
+<p class="reveal">But David was different.</p>
+<p class="reveal">He was ambitious.</p>
+<p class="reveal">He wanted more.</p>
+<p class="reveal">Very soon, Michael began noticing him.</p>
+<p class="reveal">David started doing things that other workers were afraid to do.</p>
+<p class="reveal">He helped Michael's men escape from police searches.</p>
+<p class="reveal">He secretly transported illegal materials.</p>
+<p class="reveal">He carried out dangerous assignments.</p>
+<p class="reveal">And when Michael needed someone eliminated, David was willing to do it.</p>
+<p class="reveal">Slowly, David became one of Michael's most trusted men.</p>
+<p class="reveal">Michael was impressed by his loyalty and courage.</p>
+<p class="reveal">Eventually, David was allowed to attend important meetings.</p>
+<p class="reveal">That was where he met Jack Wilson and Daniel Carter.</p>
+<p class="reveal">Michael introduced them to him.</p>
+<p class="reveal">David remained quiet during those meetings, watching everything.</p>
+<p class="reveal">He learned about their businesses.</p>
+<p class="reveal">He learned about their deals.</p>
+<p class="reveal">He learned how money moved between countries.</p>
+<p class="reveal">Most importantly, he learned how much power Michael, Jack, and Daniel possessed.</p>
+<p class="reveal">But inside David's mind, something had already begun to change.</p>
+<p class="reveal">He started asking himself one question.</p>
+<p class="dialogue reveal">Why am I still only a labourer?</p>
+<p class="reveal">He had done everything for Michael.</p>
+<p class="reveal">He had risked his life.</p>
+<p class="reveal">He had killed for him.</p>
+<p class="reveal">He had protected his business.</p>
+<p class="reveal">Yet he still stood below the people sitting at the table.</p>
+<p class="reveal">David didn't want to work for a gangster.</p>
+<p class="reveal">He wanted to become one.</p>
+<p class="reveal">He wanted the entire business for himself.</p>
+<p class="reveal">And eventually, he decided to take it.</p>
+
+<div class="scene reveal">THE BETRAYAL</div>
+
+<p class="reveal">One day, Michael went to inspect one of his mining operations.</p>
+<p class="reveal">Daniel had accompanied him that day.</p>
+<p class="reveal">The two entered the underground mining area.</p>
+<p class="reveal">The deeper they went, the darker it became.</p>
+<p class="reveal">David was already there.</p>
+<p class="reveal">He waited patiently in the shadows.</p>
+<p class="reveal">When Michael moved farther into the mine, David quietly pulled out a knife.</p>
+<p class="reveal">He stepped toward Michael.</p>
+<p class="reveal">But before David could attack—</p>
+<p class="impact red-impact reveal">Daniel saw him.</p>
+<p class="dialogue reveal">"David!"</p>
+<p class="reveal">David froze.</p>
+<p class="reveal">Michael turned around.</p>
+<p class="reveal">For a moment, nobody spoke.</p>
+<p class="reveal">Michael looked at the knife in David's hand.</p>
+<p class="reveal">His expression changed from confusion to anger.</p>
+<p class="dialogue reveal">"You?"</p>
+<p class="reveal">David tried to explain himself.</p>
+<p class="reveal">But Michael understood everything.</p>
+<p class="dialogue reveal">"You were going to kill me."</p>
+<p class="reveal">David said nothing.</p>
+<p class="reveal">Daniel stepped between them.</p>
+<p class="reveal">The situation exploded into a fight.</p>
+<p class="reveal">David attacked Daniel.</p>
+<p class="reveal">Daniel fought back.</p>
+<p class="reveal">The darkness of the mine echoed with the sound of their struggle.</p>
+<p class="reveal">David was young and aggressive, but Daniel had more experience.</p>
+<p class="reveal">After a long fight, Daniel finally defeated him.</p>
+<p class="reveal">David fell to the ground.</p>
+<p class="reveal">Daniel could have killed him.</p>
+<p class="reveal">But he didn't.</p>
+<p class="reveal">He looked at David and lowered his weapon.</p>
+<p class="dialogue reveal">"You're young," Daniel said.</p>
+<p class="dialogue reveal">"Don't destroy your life."</p>
+<p class="reveal">Daniel chose to forgive him.</p>
+<p class="reveal">Michael, however, never trusted David again.</p>
+<p class="reveal">David was thrown out of the organization.</p>
+<p class="reveal">He disappeared.</p>
+<p class="reveal">But he never forgot what happened.</p>
+<p class="reveal">And most importantly...</p>
+<p class="impact reveal">He never forgot Daniel.</p>
+
+<div class="scene reveal">A FACE STOLEN</div>
+
+<p class="reveal">David spent years planning his revenge.</p>
+<p class="reveal">Then he found a scientist who specialized in creating highly realistic masks.</p>
+<p class="reveal">David wanted something impossible.</p>
+<p class="reveal">A mask that looked exactly like Daniel Carter.</p>
+<p class="reveal">The scientist refused.</p>
+<p class="reveal">David threatened him.</p>
+<p class="dialogue reveal">"If you don't make it, your children will pay the price."</p>
+<p class="reveal">Terrified, the scientist finally agreed.</p>
+<p class="reveal">After weeks of work, the mask was completed.</p>
+<p class="reveal">It looked almost identical to Daniel.</p>
+<p class="reveal">David took it.</p>
+<p class="reveal">The scientist and his family were never seen again.</p>
+<p class="reveal">David disappeared once more.</p>
+<p class="reveal">But now he had a new identity.</p>
+<p class="reveal">A new face.</p>
+<p class="reveal">And a new plan.</p>
+
+<div class="scene reveal">THE DOUBLE</div>
+
+<p class="reveal">Whenever Daniel became drunk during important meetings, David would secretly use the mask.</p>
+<p class="reveal">He would appear as Daniel.</p>
+<p class="reveal">He attended meetings.</p>
+<p class="reveal">He met foreign dealers.</p>
+<p class="reveal">He collected money.</p>
+<p class="reveal">He learned more about the business.</p>
+<p class="reveal">Nobody suspected anything.</p>
+<p class="reveal">The real Daniel would remember very little afterward.</p>
+<p class="reveal">David slowly began stealing money from the organization.</p>
+<p class="reveal">But money was never enough.</p>
+<p class="reveal">He still wanted Michael Brooks dead.</p>
+<p class="reveal">He wanted the entire empire.</p>
+<p class="reveal">He wanted revenge.</p>
+<p class="reveal">But before David could complete his plan...</p>
+<p class="impact reveal">Michael Brooks was killed.</p>
+<p class="reveal">Ryan had killed him.</p>
+<p class="reveal">David lost his chance.</p>
+<p class="reveal">And when David discovered that Ryan was responsible, he decided that Ryan would pay.</p>
+<p class="reveal">That was why David had pulled the trigger.</p>
+<p class="reveal">Ryan had become his final target.</p>
+
+<div class="flashback reveal">
+    NOW...
+    <small>THE PRESENT</small>
+</div>
+
+<p class="reveal">David stood before Jack and Daniel.</p>
+<p class="reveal">Daniel's face was filled with anger.</p>
+<p class="dialogue reveal">"You stole from me."</p>
+<p class="reveal">David smiled.</p>
+<p class="dialogue reveal">"Everything you had... I could have had."</p>
+<p class="reveal">Daniel stepped forward.</p>
+<p class="reveal">David immediately attacked.</p>
+<p class="reveal">The room erupted into chaos.</p>
+<p class="reveal">Jack joined the fight.</p>
+<p class="reveal">David was stronger than they expected.</p>
+<p class="reveal">He moved quickly and attacked both men.</p>
+<p class="reveal">Daniel tried to reach him, but David pushed him away.</p>
+<p class="reveal">Jack finally managed to strike David directly in the face.</p>
+<p class="reveal">David staggered backward.</p>
+<p class="reveal">Jack grabbed Daniel.</p>
+<p class="dialogue reveal">"Run!"</p>
+<p class="reveal">They escaped from the building.</p>
+<p class="reveal">Daniel looked back at David.</p>
+<p class="dialogue reveal">"Why didn't you kill him?"</p>
+<p class="reveal">Jack continued running.</p>
+<p class="dialogue reveal">"If I killed him, how would you get back the money he stole from you?"</p>
+<p class="reveal">Daniel stopped for a moment.</p>
+<p class="reveal">Jack was right.</p>
+<p class="reveal">David had stolen everything.</p>
+<p class="reveal">But now they had almost nothing left.</p>
+<p class="reveal">Their business was collapsing.</p>
+<p class="reveal">Michael was dead.</p>
+<p class="reveal">James was dead.</p>
+<p class="reveal">Ryan was dead.</p>
+<p class="reveal">Their transport network was gone.</p>
+<p class="reveal">And David had stolen their money.</p>
+<p class="reveal">There was only one place left.</p>
+<p class="impact reveal">The mining operation.</p>
+
+<div class="scene reveal">BACK TO THE MINE</div>
+
+<p class="reveal">Jack and Daniel returned to the mining area.</p>
+<p class="reveal">Daniel remembered something important.</p>
+<p class="reveal">Years earlier, Michael had made an agreement with him.</p>
+<p class="reveal">Every major transportation operation would be divided equally.</p>
+<p class="reveal">Fifty percent for Michael.</p>
+<p class="reveal">Fifty percent for Daniel.</p>
+<p class="reveal">It had been built on trust.</p>
+<p class="reveal">Daniel believed that the original agreement documents could help him recover what belonged to him.</p>
+<p class="dialogue reveal">"If I find that document," Daniel said, "I can claim my share."</p>
+<p class="reveal">Jack nodded.</p>
+<p class="reveal">They began searching.</p>
+<p class="reveal">The mine was almost completely abandoned.</p>
+<p class="reveal">They searched through old offices, storage rooms, and documents.</p>
+<p class="reveal">Then they heard footsteps.</p>
+<p class="reveal">Jack turned.</p>
+<p class="reveal">David Harris stood at the entrance.</p>
+<p class="reveal">He had found them.</p>
+<p class="reveal">David slowly smiled.</p>
+<p class="dialogue reveal">"Looking for something?"</p>
+<p class="reveal">Jack stepped forward.</p>
+<p class="dialogue reveal">"Stay away from him."</p>
+<p class="reveal">David laughed.</p>
+<p class="dialogue reveal">"You're protecting Daniel now?"</p>
+<p class="reveal">Jack attacked.</p>
+<p class="reveal">The two fought through the mining area.</p>
+<p class="reveal">Daniel continued searching for the document.</p>
+<p class="reveal">David and Jack exchanged blow after blow.</p>
+<p class="reveal">Jack managed to push David backward.</p>
+<p class="reveal">But David suddenly pulled out a knife.</p>
+<p class="reveal">Before Jack could react, David stabbed him in the abdomen.</p>
+<p class="impact red-impact reveal">Jack collapsed.</p>
+<p class="dialogue reveal">"JACK!"</p>
+<p class="reveal">Daniel turned around.</p>
+<p class="reveal">His face changed instantly.</p>
+<p class="reveal">David moved toward Daniel.</p>
+<p class="dialogue reveal">"You should have killed me years ago."</p>
+<p class="reveal">Daniel picked up Jack and tried to protect him.</p>
+<p class="reveal">David attacked again.</p>
+<p class="reveal">Daniel fought back.</p>
+<p class="reveal">David raised his weapon, ready to finish him.</p>
+<p class="reveal">But Jack, despite his injury, suddenly moved between them.</p>
+<p class="reveal">He protected Daniel.</p>
+<p class="reveal">David hesitated.</p>
+<p class="reveal">Daniel looked around desperately.</p>
+<p class="reveal">Then he saw something lying on the ground.</p>
+<p class="reveal">A gun.</p>
+<p class="reveal">Daniel grabbed it.</p>
+<p class="reveal">David turned toward him.</p>
+<p class="reveal">Daniel raised the weapon.</p>
+<p class="reveal">For a moment, the entire mine became silent.</p>
+<p class="reveal">Daniel's eyes filled with anger.</p>
+<p class="reveal">He pulled the trigger.</p>
+<p class="impact red-impact reveal">BANG!</p>
+<p class="reveal">David fell.</p>
+<p class="reveal">The mask dropped beside him.</p>
+<p class="impact reveal">David Harris was dead.</p>
+<p class="reveal">Jack collapsed.</p>
+<p class="reveal">Daniel immediately rushed to him.</p>
+<p class="dialogue reveal">"Jack!"</p>
+<p class="reveal">Jack didn't respond.</p>
+<p class="reveal">Daniel carried him out of the mine.</p>
+<p class="reveal">For the first time in years, Daniel wasn't thinking about money.</p>
+<p class="reveal">He wasn't thinking about business.</p>
+<p class="impact reveal">He was thinking about his friend.</p>
+
+<div class="scene reveal">THE END OF THE JOURNEY</div>
+
+<p class="reveal">Jack opened his eyes in a hospital.</p>
+<p class="reveal">The room was quiet.</p>
+<p class="reveal">Daniel was sitting beside him.</p>
+<p class="reveal">For a long time, neither of them spoke.</p>
+<p class="reveal">Finally, Daniel looked at Jack.</p>
+<p class="dialogue reveal">"We lost everything."</p>
+<p class="reveal">Jack stared at the ceiling.</p>
+<p class="dialogue reveal">"Maybe we were never supposed to have it."</p>
+<p class="reveal">Daniel looked down.</p>
+<p class="reveal">They remembered everything.</p>
+<p class="reveal">Michael.</p>
+<p class="reveal">David.</p>
+<p class="reveal">Ryan.</p>
+<p class="reveal">James.</p>
+<p class="reveal">The drugs.</p>
+<p class="reveal">The money.</p>
+<p class="reveal">The violence.</p>
+<p class="reveal">The endless fear.</p>
+<p class="reveal">Their journey had started with business.</p>
+<p class="reveal">But slowly, business had become greed.</p>
+<p class="reveal">Greed had become crime.</p>
+<p class="reveal">And crime had nearly destroyed them.</p>
+<p class="reveal">Jack finally spoke.</p>
+<p class="dialogue reveal">"We stepped into the wrong path."</p>
+<p class="reveal">Daniel nodded.</p>
+<p class="dialogue reveal">"And it took almost everything from us."</p>
+<p class="reveal">Jack looked at his friend.</p>
+<p class="dialogue reveal">"What do we do now?"</p>
+<p class="reveal">Daniel took a deep breath.</p>
+<p class="dialogue reveal">"We stop."</p>
+<p class="reveal">Jack understood.</p>
+<p class="reveal">They decided to end their illegal business.</p>
+<p class="reveal">No more drugs.</p>
+<p class="reveal">No more illegal transportation.</p>
+<p class="reveal">No more killing.</p>
+<p class="reveal">No more running.</p>
+<p class="reveal">They would surrender themselves to the police and face the consequences of everything they had done.</p>
+<p class="reveal">It was not an easy decision.</p>
+<p class="reveal">But it was the first honest decision they had made in years.</p>
+<p class="reveal">Before leaving the hospital, Daniel looked at Jack.</p>
+<p class="dialogue reveal">"Whatever happens next..."</p>
+<p class="reveal">Jack looked at him.</p>
+<p class="dialogue reveal">"We stay together."</p>
+<p class="reveal">Daniel smiled.</p>
+<p class="dialogue reveal">"Always."</p>
+<p class="reveal">Their friendship had survived everything.</p>
+<p class="reveal">The money hadn't.</p>
+<p class="reveal">The business hadn't.</p>
+<p class="reveal">Their power hadn't.</p>
+<p class="reveal">But their friendship had.</p>
+<p class="reveal">And sometimes, losing everything is what finally teaches a person what truly matters.</p>
+
+<div class="quote-block reveal">
+    Sometimes the strongest choice is not to continue fighting...
+    but to finally choose a different path.
+</div>
+
+<!-- FINAL MORAL AND DRUG AWARENESS -->
+
+<section class="moral reveal" aria-labelledby="moral-title">
+
+    <p class="moral-kicker">THE FINAL WARNING</p>
+
+    <h2 id="moral-title">
+        THE MORAL OF THE STORY
+    </h2>
+
+    <p class="sub">
+        A WARNING TO THIS GENERATION.
+    </p>
+
+    <p>Listen carefully, youngsters.</p>
+
+    <p>
+        The devil doesn't always arrive with horns.
+        Sometimes, he arrives disguised as a friend,
+        offering you one little escape, one little experiment,
+        one little taste of freedom.
+    </p>
+
+    <p>And that's how the trap begins.</p>
+
+    <p>
+        Drugs don't ask for your entire life on the first day.
+        They take it piece by piece.
+    </p>
+
+    <p>
+        First, they take your control.<br>
+        Then your ambition.<br>
+        Then your relationships.<br>
+        Then your future.
+    </p>
+
+    <p>
+        And when you finally realise what's happening,
+        the only thing left is regret.
+    </p>
+
+    <p>
+        You think you're in control?<br>
+        You think you can stop whenever you want?<br>
+        That's exactly what the trap wants you to believe.
+    </p>
+
+    <p>
+        The streets are full of people who once had dreams.
+        Some wanted to become doctors, engineers, artists, leaders.
+        Some wanted to make their families proud.
+    </p>
+
+    <p>
+        Now their dreams are buried beneath a habit
+        they thought they could control.
+    </p>
+
+    <p class="punch">
+        DON'T BE THE NEXT NAME ON THAT LIST.
+    </p>
+
+    <p>Remember this:</p>
+
+    <p>
+        The real devil isn't the person standing against you.
+        It's the destruction you willingly invite into your own life.
+    </p>
+
+    <p>
+        Don't let drugs turn your potential into a graveyard
+        of unfinished dreams.
+    </p>
+
+    <p>You weren't born to be controlled by a substance.</p>
+
+    <p class="punch">
+        BE STRONG ENOUGH TO WALK AWAY.
+    </p>
+
+    <p>The world doesn't need another victim.</p>
+
+    <p>It needs youngsters who know their worth.</p>
+
+    <p class="final-line">
+        YOUR LIFE. YOUR CHOICE.<br>
+        YOUR FINAL GAME.
+    </p>
+
+    <p class="final-line">
+        DON'T LET DRUGS WIN.
+    </p>
+
+    <p class="signature">
+        — Sabarish P
+    </p>
+
+</section>
+
+<div class="end-mark">
+    THE END
+</div>
+
+</article>
+</main>
+
+<footer class="footer">
+
+    <strong>THE HARBOUR</strong>
+
+    A CRIME THRILLER BY SABARISH P
+
+    <div class="footer-nav">
+        <a href="index.html">← HOME</a>
+        <a href="chapter-two.html">← CHAPTER TWO</a>
+        <a href="#story">READ AGAIN ↑</a>
+    </div>
+
+</footer>
+
+<script>
+(() => {
+
+    /* READING PROGRESS */
+
+    const bar = document.getElementById("readingProgress");
+
+    function updateProgress() {
+
+        const max =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+        const value = max > 0
+            ? (window.scrollY / max) * 100
+            : 0;
+
+        bar.style.width = value + "%";
+    }
+
+    window.addEventListener("scroll", updateProgress, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateProgress);
+
+    updateProgress();
+
+
+    /* CINEMATIC SCROLL REVEAL */
+
+    const items = document.querySelectorAll(".reveal");
+
+    if (
+        "IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        obs.unobserve(entry.target);
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.08,
+                rootMargin: "0px 0px -35px 0px"
+            }
+        );
+
+        items.forEach(item => observer.observe(item));
+
+    } else {
+
+        items.forEach(item => {
+            item.classList.add("visible");
+        });
+
+    }
+
+})();
+</script>
+
+</body>
+</html>
